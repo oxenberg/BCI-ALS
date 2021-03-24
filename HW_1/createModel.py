@@ -94,7 +94,7 @@ def train_mne_feature(data,labels,raw):
     # print('Cross-validation accuracy score (with optimized parameters) = %1.3f '
     #       '(+/- %1.5f)' % (np.mean(new_scores), np.std(new_scores)))
     
-    return pipe
+    return pipe, gs
 
     
     
