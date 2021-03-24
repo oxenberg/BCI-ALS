@@ -16,10 +16,9 @@ import time
 from inputModule import read_params
 
 
-PARAMS = read_params()
-CH_AMOUNT = PARAMS.CH_AMOUNT
-TIME_BETWEEN_EVENTS = PARAMS.TIME_BETWEEN_EVENTS
-SAMPLE_RATE = PARAMS.SAMPLE_RATE
+CH_AMOUNT = 16
+TIME_BETWEEN_EVENTS = 3
+SAMPLE_RATE = 125
 TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE*TIME_BETWEEN_EVENTS
 
 uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
@@ -65,7 +64,7 @@ def create_raw_data(results, stim=None):
 def run_expirement(sample):
     data = np.array(sample.channels_data)* uVolts_per_count
     
-        all_time = time.time() - start_time
+    all_time = time.time() - start_time
     ITER["COUNT"] +=1
     if ITER["COUNT"]% TIME_BETWEEN_EVENTS_RATE == 0 :
          int_action = random.randint(1, 3)
