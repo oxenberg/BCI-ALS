@@ -14,6 +14,7 @@ from inputModule import read_params
 MODEL_PATH = "gsModel.pkl"
 PARAMS = read_params()
 
+
 class PredictionModel:
     def __init__(self):
         if path.exists(MODEL_PATH):
@@ -24,11 +25,16 @@ class PredictionModel:
             self.model = joblib.load(MODEL_PATH)
 
     def updateModel(self, data, label):
-        self.model.fit(data, label)
+        epochs = preprocess(data, label)
+        labels = epochs.events[:, -1]
+        update_data = epochs.get_data()
+        self.model.fit(update_data, labels)
         joblib.dump(self.model, MODEL_PATH)
 
     def predict(self, data):
-        label = self.model.predict(data)
+        epochs = preprocess(data)
+        prediction_data = epochs.get_data()
+        label = self.model.predict(prediction_data)
         return label
 
 
