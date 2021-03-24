@@ -1,1 +1,1 @@
-from .inputModule import signalReader
+from .inputModule import SignalReader

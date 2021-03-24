@@ -5,8 +5,9 @@ import numpy as np
 
 #work library
 from UItest import UItest
+from PredictionModelModule import preprocess,PredictionModel
 
-class signalReader:
+class SignalReader:
 
     def __init__(self):
         self.params = self.read_params()  # global experiment params
