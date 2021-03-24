@@ -8,8 +8,8 @@ from mne import Epochs, pick_types
 import mne
 from os import path
 import joblib
-from Offline import create_raw_data
 from inputModule import read_params
+import numpy as np
 
 MODEL_PATH = "gsModel.pkl"
 
@@ -37,15 +37,29 @@ class PredictionModel:
         label = self.model.predict(prediction_data)
         return label
 
+    def create_raw_data(self, results, stim=None):
+        ch_names = ['EEG ' + str(ID) for ID in range(self.params["CH_AMOUNT"])]
+        ch_type = 'eeg'
+        info = mne.create_info(ch_names, self.params["SAMPLE_RATE"], ch_type)
+        rawData = mne.io.RawArray(results, info)
+        #: add events data to raw
+        if not stim is None:
+            stim_info = mne.create_info(['STI'], rawData.info['sfreq'], ['stim'])
+            stim = np.expand_dims(stim, axis=0)
+            stim_raw = mne.io.RawArray(stim, stim_info)
+            rawData.add_channels([stim_raw], force_update_info=True)
+            # eventsData = mne.find_events(rawData, stim_channel='STI')
+        return rawData
+
     def preprocess(self, data=None, label=None):
         DATA_PATH = "data/"
         EXP_NAME = DATA_PATH + "Or_3_raw.fif"  ## file name to run the anaylsis on
         if data is None:
             raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
         elif label is None:
-            raw = create_raw_data(data)
+            raw = self.create_raw_data(data)
         else:
-            raw = create_raw_data(data, label)
+            raw = self.create_raw_data(data, label)
         tmin, tmax = self.params["T_MIN"], self.params["T_MAX"]
         raw.filter(None, 40., fir_design='firwin', skip_by_annotation='edge')
         events = mne.find_events(raw, 'STI')
