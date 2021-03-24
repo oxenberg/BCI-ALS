@@ -11,6 +11,20 @@ class UItest:
         self.current_time = 0
         self.time_to_wait = 2000
         self.round = 0
+        self.left_space = 8
+        self.right_space = 8
+        self.X_space = 1
+        self.bar = f"|{' '*self.left_space}{'X'*self.X_space}{' '*self.right_space}|"
+
+    def move_bar(self,action):
+        action_name = self.params["ACTIONS"][str(action)]
+
+        if action_name == "RIGHT":
+            self.bar = f"|{' ' * self.left_space}{'X' * self.X_space+1}{' ' * self.right_space-1}|"
+        elif action_name == "RIGHT":
+            self.bar = f"|{' ' * self.left_space-1}{'X' * self.X_space+1}{' ' * self.right_space}|"
+
+        #no need feedback for None
     def new_game(self, action):
         time.sleep(self.time_to_wait)
         self.round +=1
@@ -32,7 +46,7 @@ class UItest:
         :return:
         '''
         self.current_time += 1
-
+        print(self.bar)
     def get_game_time(self):
         return self.current_time
 
