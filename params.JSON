@@ -1,0 +1,14 @@
+{
+  "CH_AMOUNT" : 16,
+  "TIME_BETWEEN_GAMES" : 3,
+  "SAMPLE_RATE" : 125,
+  "EXPERIMENT_DURATION" : 1000,
+  "ACTIONS" :
+  {"1" : "LEFT",
+    "2" : "RIGHT",
+    "3" : "NONE"
+  },
+  "RUN_EXP" : 0
+
+
+}

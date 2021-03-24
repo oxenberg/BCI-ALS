@@ -65,7 +65,7 @@ def create_raw_data(results,stim):
 def run_expirement(sample):
     data = np.array(sample.channels_data)* uVolts_per_count
     
-    all_time = time.time() - start_time
+        all_time = time.time() - start_time
     ITER["COUNT"] +=1
     if ITER["COUNT"]% TIME_BETWEEN_EVENTS_RATE == 0 :
          int_action = random.randint(1, 3)
