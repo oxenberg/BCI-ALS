@@ -13,10 +13,13 @@ import numpy as np
 import mne
 import random
 import time
+from inputModule import read_params
 
-CH_AMOUNT = 16
-TIME_BETWEEN_EVENTS = 3
-SAMPLE_RATE = 125
+
+PARAMS = read_params()
+CH_AMOUNT = PARAMS.CH_AMOUNT
+TIME_BETWEEN_EVENTS = PARAMS.TIME_BETWEEN_EVENTS
+SAMPLE_RATE = PARAMS.SAMPLE_RATE
 TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE*TIME_BETWEEN_EVENTS
 
 uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
@@ -44,21 +47,18 @@ stim  = []
 
 #: create the raw object from array
 
-def create_raw_data(results,stim):
+def create_raw_data(results, stim=None):
     ch_names = ['EEG ' + str(ID) for ID in range(CH_AMOUNT)]
     ch_type = 'eeg'
     info = mne.create_info(ch_names,SAMPLE_RATE,ch_type)
     rawData = mne.io.RawArray(results,info)
-    
     #: add events data to raw
-    stim_info = mne.create_info(['STI'], rawData.info['sfreq'], ['stim'])
-    stim = np.expand_dims(stim, axis=0) 
-    stim_raw = mne.io.RawArray(stim, stim_info)
-    rawData.add_channels([stim_raw], force_update_info=True)
-    
-    
-    
-    #eventsData = mne.find_events(rawData, stim_channel='STI')
+    if not stim is None:
+        stim_info = mne.create_info(['STI'], rawData.info['sfreq'], ['stim'])
+        stim = np.expand_dims(stim, axis=0)
+        stim_raw = mne.io.RawArray(stim, stim_info)
+        rawData.add_channels([stim_raw], force_update_info=True)
+        #eventsData = mne.find_events(rawData, stim_channel='STI')
     return rawData
 
 

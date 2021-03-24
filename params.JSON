@@ -8,7 +8,9 @@
     "2" : "RIGHT",
     "3" : "NONE"
   },
-  "RUN_EXP" : 0
+  "RUN_EXP" : 0,
+  "T_MIN" : -1,
+  "T_MAX" :0.8
 
 
 }

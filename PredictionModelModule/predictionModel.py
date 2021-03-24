@@ -8,13 +8,16 @@ from mne import Epochs, pick_types
 import mne
 from os import path
 import joblib
+from Offline import create_raw_data
+from inputModule import read_params
 
 MODEL_PATH = "gsModel.pkl"
-
+PARAMS = read_params()
 
 class PredictionModel:
     def __init__(self):
         if path.exists(MODEL_PATH):
+            print("Couldn't find existing model. Creating new one")
             self.model = joblib.load(MODEL_PATH)
         else:
             createInitialModel()
@@ -44,14 +47,19 @@ features = ['app_entropy', 'decorr_time', 'higuchi_fd',
 selected_features = ["std", "mean", "kurtosis", "skewness"]  # can be changed to any feature
 
 
-def preprocess():
-    tmin, tmax = -1., 0.8  #: need to check the best
-    raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
+def preprocess(data=None, label=None):
+    if data is None:
+        raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
+    elif label is None:
+        raw = create_raw_data(data)
+    else:
+        raw = create_raw_data(data, label)
+    tmin, tmax = PARAMS.T_MIN, PARAMS.T_MAX
     raw.filter(None, 40., fir_design='firwin', skip_by_annotation='edge')
     events = mne.find_events(raw, 'STI')
     picks = pick_types(raw.info, meg=False, eeg=True, stim=False, eog=False,
                        exclude='bads')
-    event_id = {'Left': 1, 'right': 2, 'none': 3}
+    event_id = PARAMS.ACTIONS  # {'Left': 1, 'right': 2, 'none': 3}  #TODO: notice different order from JSON
     epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                     baseline=None, preload=True)
     epochs.pick_types(eeg=True, exclude='bads')  # remove stim and EOG
