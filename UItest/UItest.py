@@ -1,5 +1,6 @@
 import time
-from inputModule import read_params
+from inputModule.utils import read_params
+
 
 class UItest:
     def __init__(self):
@@ -14,20 +15,21 @@ class UItest:
         self.left_space = 8
         self.right_space = 8
         self.X_space = 1
-        self.bar = f"|{' '*self.left_space}{'X'*self.X_space}{' '*self.right_space}|"
+        self.bar = f"|{' ' * self.left_space}{'X' * self.X_space}{' ' * self.right_space}|"
 
-    def move_bar(self,action):
+    def move_bar(self, action):
         action_name = self.params["ACTIONS"][str(action)]
 
         if action_name == "RIGHT":
-            self.bar = f"|{' ' * self.left_space}{'X' * self.X_space+1}{' ' * self.right_space-1}|"
+            self.bar = f"|{' ' * self.left_space}{'X' * self.X_space + 1}{' ' * self.right_space - 1}|"
         elif action_name == "RIGHT":
-            self.bar = f"|{' ' * self.left_space-1}{'X' * self.X_space+1}{' ' * self.right_space}|"
+            self.bar = f"|{' ' * self.left_space - 1}{'X' * self.X_space + 1}{' ' * self.right_space}|"
 
-        #no need feedback for None
+        # no need feedback for None
+
     def new_game(self, action):
         time.sleep(self.time_to_wait)
-        self.round +=1
+        self.round += 1
         self.current_time = 0
         print("####new game####")
 
@@ -36,10 +38,10 @@ class UItest:
             2: "-->",
             3: "--"
         }
-
+        self.move_bar(action)
         print(f"{arrows[action]}")
 
-    def step(self, prediction):
+    def step(self, prediction=None):
         '''
 
         :param prediction: int with predicted move
@@ -47,6 +49,7 @@ class UItest:
         '''
         self.current_time += 1
         print(self.bar)
+
     def get_game_time(self):
         return self.current_time
 
@@ -58,5 +61,6 @@ class UItest:
 
     def end_all_rounds(self):
         return False
+
     def get_round(self):
         return self.round

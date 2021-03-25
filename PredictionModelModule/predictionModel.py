@@ -8,7 +8,7 @@ from mne import Epochs, pick_types
 import mne
 from os import path
 import joblib
-from inputModule import read_params
+from inputModule.utils import read_params
 import numpy as np
 
 MODEL_PATH = "gsModel.pkl"
@@ -16,13 +16,13 @@ MODEL_PATH = "gsModel.pkl"
 
 class PredictionModel:
     def __init__(self):
+        self.params = read_params()
         if path.exists(MODEL_PATH):
-            print("Couldn't find existing model. Creating new one")
+            print("Couldn't find existing model, Creating new one")
             self.model = joblib.load(MODEL_PATH)
         else:
             self.createInitialModel()
             self.model = joblib.load(MODEL_PATH)
-        self.params = read_params()
 
     def updateModel(self, data, label):
         epochs = self.preprocess(data, label)
@@ -66,7 +66,7 @@ class PredictionModel:
         picks = pick_types(raw.info, meg=False, eeg=True, stim=False, eog=False,
                            exclude='bads')
         event_id = self.params["ACTIONS"]
-        event_id = dict([(value, key) for key, value in event_id.items()])
+        event_id = dict([(value, int(key)) for key, value in event_id.items()])
         epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                         baseline=None, preload=True)
         epochs.pick_types(eeg=True, exclude='bads')  # remove stim and EOG
@@ -82,7 +82,7 @@ class PredictionModel:
         # params_grid = {'fe__app_entropy__emb': np.arange(2, 5)} #: can addd gradinet boost hyperparametrs
         params_grid = {}  #: can add gradinet boost hyperparametrs
         gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                          cv=StratifiedKFold(n_splits=5, random_state=42), n_jobs=1,
+                          cv=StratifiedKFold(n_splits=5), n_jobs=1,
                           return_train_score=True)
         gs.fit(data, y)
         scores = pd.DataFrame(gs.cv_results_)

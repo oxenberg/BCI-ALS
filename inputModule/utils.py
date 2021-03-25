@@ -1,7 +1,7 @@
 import json
 
 def read_params():
-    params_file = open('../params.JSON', )
+    params_file = open('params.JSON', )
     params = json.load(params_file)
 
     # fill more params with explanation

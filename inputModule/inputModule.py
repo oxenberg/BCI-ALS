@@ -23,10 +23,11 @@ class SignalReader:
         self.window_data = deque(maxlen=self.params["PREDICTION_WINDOW_SIZE"])  # this window have prediction data
 
         # modules initialization
-        self.board = OpenBCICyton(port='COM3', daisy=True)
+        self.board = OpenBCICyton(port='COM6', daisy=True)
         self.UItest = UItest()  # UI module
         self.prediction_model = PredictionModel()
 
+        self.counter = 0
 
 
     def start_experiment(self):
@@ -34,10 +35,11 @@ class SignalReader:
         this function activate all the online experiment session and games.
         '''
 
-        self.board.start_stream(self.run_expirement)
+        self.board.start_stream(self.run_online)
         self.board.disconnect()
 
     def run_online(self, sample):
+        self.counter+=1
         # read data from sensor
         data = np.array(sample.channels_data) * self.params["uVolts_per_count"]
 
@@ -46,12 +48,12 @@ class SignalReader:
         # round_not_end = bool(self.ITER % self.params["TIME_BETWEEN_GAMES"])
         predict_time = bool(self.UItest.get_game_time() % self.params["TIME_BETWEEN_PREDICTIONS"])
         train_time = bool(self.UItest.get_round() % self.params["ROUNDS_BETWEEN_TRAIN"])
-
+        print(self.UItest.end_game())
         # in the first integration the round_not_end always be 0 and the else will activate
         if not self.UItest.end_game():
             # need to check if window gap time over and if the window not empty
-            if predict_time and self.window_data:
-                prediction = PredictionModel.predict(self.window_data)
+            if predict_time and len(self.window_data) == self.params["PREDICTION_WINDOW_SIZE"] :
+                prediction = self.prediction_model.predict(list(self.window_data))
                 self.UItest.step(prediction)
                 stim = self.int_action
 
@@ -63,19 +65,20 @@ class SignalReader:
             self.all_game_data.append(data)
             self.stims.append(stim)
 
-        elif self.UItest.get_round() > 0:
-            self.prediction_model.updateModel()
+        else:
+            if not self.UItest.get_round() == 0:
+                self.prediction_model.updateModel()
             # restart window data, ##need to change if we want more
             self.window_data.clear()
             self.all_game_data = []
             self.stims = []
-
+            self.UItest.round+=1
             # start new game with random action
             self.int_action = np.random.randint(1, len(self.params["ACTIONS"]) + 1)
             self.UItest.new_game(self.int_action)
 
 
-        self.ITER["COUNT"] += 1
+        self.ITER += 1
 
         # if we finish the experiment stop streaming
         if self.UItest.end_all_rounds():
