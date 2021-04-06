@@ -73,21 +73,21 @@ class PredictionModel:
         return epochs
 
     def preprocess(self, data=None, label=None, read_from_file = False):
-        drop_ch = ['EEG 0','EEG 1','EEG 2']
+        drop_ch = ['EEG 1','EEG 2']
         epochs = None
         data = np.array(data).T
         DATA_PATH = "data/"
-        EXP_NAME = DATA_PATH + "Or_3_raw.fif"  ## file name to run the anaylsis on
+        EXP_NAME = DATA_PATH + "Yoel_4_raw.fif"  ## file name to run the anaylsis on
         if read_from_file:
             raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
             epochs = self.create_epochs(raw)
         elif label == None:
             raw = self.create_raw_data(data)
-            raw.drop_channels(drop_ch)
+            # raw.drop_channels(drop_ch)
             raw.filter(None, 40., fir_design='firwin', skip_by_annotation='edge')
         else:
             raw = self.create_raw_data(data, label)
-            raw.drop_channels(drop_ch)
+            # raw.drop_channels(drop_ch)
             epochs = self.create_epochs(raw)
 
         return epochs, raw

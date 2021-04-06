@@ -69,7 +69,7 @@ class UItest:
         }
 
         print(f"{arrows[action]}")
-        print(self.bar)
+        print(self.bar, end='\r')
         time.sleep(self.time_to_wait)
 
     def step(self, prediction=None):
