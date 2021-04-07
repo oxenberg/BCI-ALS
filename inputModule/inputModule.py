@@ -7,6 +7,7 @@ from collections import deque
 from inputModule.utils import read_params
 from UItest import UItest
 from PredictionModelModule import PredictionModel
+from plotter import Plotter
 
 
 class SignalReader:
@@ -18,6 +19,7 @@ class SignalReader:
         self.int_action = self.params["DEFAULT_ACTION"]
         self.stims = []
         self.all_game_data = []
+        self.predicted_labels_to_game = []
         # windows for 1 prediction and for batch
         self.batch = {"X": [], "y": []}
         self.window_data = deque(maxlen=self.params["PREDICTION_WINDOW_SIZE"])  # this window have prediction data
@@ -26,7 +28,7 @@ class SignalReader:
         self.board = OpenBCICyton(port='COM3', daisy=True)
         self.UItest = UItest()  # UI module
         self.prediction_model = PredictionModel()
-
+        self.plotter = Plotter(self.params["DEBUG"])
         self.counter = 0
 
 
@@ -40,6 +42,7 @@ class SignalReader:
 
     def run_online(self, sample):
         self.counter += 1
+
         # read data from sensor
         data = np.array(sample.channels_data) * self.params["uVolts_per_count"]
 
@@ -53,10 +56,10 @@ class SignalReader:
         if not self.UItest.end_game():
             # need to check if window gap time over and if the window not empty
             if predict_time and len(self.window_data) == self.params["PREDICTION_WINDOW_SIZE"] :
-                prediction = self.prediction_model.predict(list(self.window_data))
-                self.UItest.step(prediction[0])
+                prediction = self.prediction_model.predict(list(self.window_data))[0]
+                self.UItest.step(prediction)
                 stim = self.int_action
-
+                self.predicted_labels_to_game.append(prediction)
             else:
                 self.UItest.step()  # continue the time counting for the game
                 stim = self.params["DEFAULT_ACTION"]
@@ -67,16 +70,22 @@ class SignalReader:
 
         # if we finish the experiment stop streaming
         elif self.UItest.end_all_rounds():
+            self.plotter.collect_data(self.UItest.get_round(), self.predicted_labels_to_game, self.int_action)
+            self.plotter.save_data()
+            self.plotter.plot()
             self.board.stop_stream()
         # new game and in the first round init the values
         else:
-            # not need to train for first round
-            if not self.UItest.get_round() == 1:
+            # collect data to plot
+            self.plotter.collect_data(self.UItest.get_round(), self.predicted_labels_to_game, self.int_action)
+            # not need to train for first round and train time
+            if not self.UItest.get_round() == 1 and train_time:
                 self.prediction_model.updateModel(self.all_game_data, self.stims)
+                self.stims = []
+                self.all_game_data = []
+
             # restart window data, ##need to change if we want more
             self.window_data.clear()
-            self.all_game_data = []
-            self.stims = []
             # start new game with random action
             self.int_action = np.random.randint(1, len(self.params["ACTIONS"]) + 1)
             self.UItest.new_game(self.int_action)
