@@ -2,7 +2,7 @@ import time
 from inputModule.utils import read_params
 
 
-class UItest:
+class UISkeleton:
     def __init__(self):
         """
 
@@ -32,7 +32,7 @@ class UItest:
         self.bar = f"|{' ' * self.left_space}{'X' * self.X_space}{' ' * self.right_space}|"
 
     def bar_is_full(self):
-        # TODO change here to the way you checks if the bar full
+        # TODO change here to the way you check if the bar full
         return self.X_space >= self.params["BAR_MAX"]
 
     def move_bar(self, action):

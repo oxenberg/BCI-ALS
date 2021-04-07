@@ -5,7 +5,7 @@ from collections import deque
 
 # work library
 from inputModule.utils import read_params
-from UItest import UItest
+from UItest import UISkeleton, UI
 from PredictionModelModule import PredictionModel
 from plotter import Plotter
 
@@ -26,7 +26,7 @@ class SignalReader:
 
         # modules initialization
         self.board = OpenBCICyton(port='COM3', daisy=True)
-        self.UItest = UItest()  # UI module
+        self.UItest = UI()  # UI module
         self.prediction_model = PredictionModel()
         self.plotter = Plotter(self.params["DEBUG"])
         self.counter = 0

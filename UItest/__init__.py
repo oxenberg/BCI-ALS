@@ -2,4 +2,4 @@
 this module only for
 '''
 
-from .UItest import UItest
+from .UISkeleton import UISkeleton
