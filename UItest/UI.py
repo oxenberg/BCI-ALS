@@ -123,7 +123,6 @@ class UI(UISkeleton):
 
     def new_game(self, action):
 
-
         new_round_surface = self.font.render('new round', False, (0, 0, 0))
         new_round_rect = new_round_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 8))
 
@@ -147,20 +146,21 @@ class UI(UISkeleton):
         elif action_name == 'RIGHT':
             self.current_image = pg.image.load(r'UIResources\right.png')
 
-        if self.current_image:
-            self.current_image = pg.transform.scale(self.current_image,(200,100))
-            im_rect = self.current_image.get_rect(center=self.image_center)
+        else:
+            self.current_image = pg.image.load(r'UIResources\idle.png')
+
+        self.current_image = pg.transform.scale(self.current_image,(200,100))
+        im_rect = self.current_image.get_rect(center=self.image_center)
+        self.screen.blit(self.current_image, im_rect)
+        pg.display.flip()
+
+        for i in range(self.blinks):
+            self.screen.fill((255, 255, 255), im_rect)
+            pg.display.flip()
+            time.sleep(self.blink_duration)
             self.screen.blit(self.current_image, im_rect)
             pg.display.flip()
-
-            # TODO check if this fucks Or's code from time measuring respect
-            for i in range(self.blinks):
-                self.screen.fill((255, 255, 255), im_rect)
-                pg.display.flip()
-                time.sleep(self.blink_duration)
-                self.screen.blit(self.current_image, im_rect)
-                pg.display.flip()
-                time.sleep(self.blink_duration)
+            time.sleep(self.blink_duration)
 
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
