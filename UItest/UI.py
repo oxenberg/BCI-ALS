@@ -9,9 +9,9 @@ from pygame.locals import (
 )
 
 
-class UI(UISkeleton):
+class UI(UISkeleton.UISkeletonClass):
     def __init__(self):
-        UISkeleton.__init__(self)
+        UISkeleton.UISkeletonClass.__init__(self)
 
         # Initialize pygame
         pg.init()
