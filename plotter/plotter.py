@@ -1,20 +1,22 @@
 import pandas as pd
 import seaborn as sns
 
-from inputModule import read_params
+from inputModule.utils import read_params
 
 
 class Plotter:
-    def __init__(self,debug = False):
+    def __init__(self, debug=False):
         self.params = read_params()
         self.debug = debug
         self.data = pd.DataFrame(columns=["game_index", "pred_label", "real_label"])
-    def plot_acc(self):...
+
+    def plot_acc(self):
+        ...
 
     def plot_label_dis(self):
         action_dict = self.params["ACTIONS"]
-        self.data["x_round_label"] = self.data[["game_index","real_label"]].apply(lambda row:
-                                                                                  f"{row['game_index']},{action_dict[str(row['real_label'])]}")
+        self.data["x_round_label"] = self.data[["game_index", "real_label"]].apply(lambda row:
+                                                                                   f"{row['game_index']},{action_dict[str(row['real_label'])]}")
 
         g = sns.catplot(
             data=self.data, kind="count",
@@ -22,6 +24,7 @@ class Plotter:
             ci="sd", palette="dark", alpha=.6, height=6
         )
         g.legend.set_title("label distribution per game")
+
     def collect_data(self, game_index, predicted_labels, label):
         """
         collect data to dataframe
@@ -30,7 +33,7 @@ class Plotter:
         :param label: int, real label for game
         """
         # game index get always next round index
-        game_index -=1
+        game_index -= 1
 
         raw_index = self.data.shape[0]
         labels = [label] * len(predicted_labels)

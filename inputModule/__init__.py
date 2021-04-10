@@ -1,2 +1,2 @@
 from .inputModule import SignalReader
-from.utils import read_params
+from .utils import read_params

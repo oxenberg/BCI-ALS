@@ -82,7 +82,7 @@ class UISkeleton:
         if prediction == self.current_game_direction:
             self.move_bar(prediction)
         self.current_time += 1
-        print(self.bar)
+        # print(self.bar)
 
     def get_game_time(self):
         # TODO no need to change
