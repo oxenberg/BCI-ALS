@@ -5,7 +5,7 @@ from collections import deque
 
 # work library
 from inputModule.utils import read_params
-from UItest import UISkeleton, UI
+from UItest import UI  # , UISkeleton
 from PredictionModelModule import PredictionModel
 from plotter import Plotter
 
@@ -32,13 +32,15 @@ class SignalReader:
         self.counter = 0
 
 
-    def start_experiment(self):
+    def start_experiment(self, simulation = False):
         '''
         this function activate all the online experiment session and games.
         '''
-
-        self.board.start_stream(self.run_online)
-        self.board.disconnect()
+        if simulation:
+            nothing = True  # simulate
+        else:
+            self.board.start_stream(self.run_online)
+            self.board.disconnect()
 
     def run_online(self, sample):
         self.counter += 1

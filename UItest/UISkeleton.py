@@ -2,7 +2,7 @@ import time
 from inputModule.utils import read_params
 
 
-class UISkeleton:
+class UISkeletonClass:
     def __init__(self):
         """
 
