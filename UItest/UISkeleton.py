@@ -12,7 +12,7 @@ class UISkeleton:
 
         self.params = read_params()
         self.current_time = 0
-        self.time_to_wait = 5
+        self.time_to_wait = 2
         self.round = 0
 
         # TODO this params is for the test only need to change to your GUI params

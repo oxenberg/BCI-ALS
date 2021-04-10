@@ -24,11 +24,11 @@ TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE*TIME_BETWEEN_EVENTS
 uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
 
 
-DATA_PATH = "..data/"
-EXP_NAME = DATA_PATH+"test_raw.fif" #: give name to the expirement
+DATA_PATH = "data/"
+EXP_NAME = DATA_PATH+"Or_4_raw.fif" #: give name to the expirement
 
 
-EXPERIMENT_DURATION = 50
+EXPERIMENT_DURATION = 300
 ITER = {"COUNT" : 0} #for cout the time 
 ACTIONS = {1 : "LEFT",2 : "RIGHT",3 : "NONE"}
 

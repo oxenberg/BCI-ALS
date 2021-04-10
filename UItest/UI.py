@@ -96,15 +96,20 @@ class UI(UISkeleton):
                         pg.display.flip()
                         running = False
 
-    def show_bar(self, pos, size, border_color, bar_color):
+    def show_bar(self, pos, size, border_color, bar_color, reset=False):
         pg.draw.rect(self.screen, border_color, (*pos, *size), 1)
         inner_pos = (pos[0] + 3, pos[1] + 3)
         inner_size = ((size[0] - 6) * (self.progress / self.params['BAR_MAX']), size[1] - 6)
-        pg.draw.rect(self.screen, bar_color, (*inner_pos, *inner_size))
-
+        if reset:
+            bar_color = (255, 255, 255)
+            inner_size = ((size[0] - 6), size[1] - 6)
+            pg.draw.rect(self.screen, bar_color, (*inner_pos, *inner_size))
+        else:
+            pg.draw.rect(self.screen, bar_color, (*inner_pos, *inner_size))
+        pg.display.flip()
     def reset_bar(self):
         self.progress = 0
-        self.show_bar(**self.bar_params)
+        self.show_bar(**self.bar_params, reset=True)
 
     def move_bar(self, action):
         action_name = self.params["ACTIONS"][str(action)]
@@ -118,6 +123,12 @@ class UI(UISkeleton):
 
     def new_game(self, action):
 
+
+        new_round_surface = self.font.render('new round', False, (0, 0, 0))
+        new_round_rect = new_round_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 8))
+
+        self.screen.blit(new_round_surface, new_round_rect)
+        pg.display.flip()
         if self.current_image:
             im_rect = self.current_image.get_rect(center=self.image_center)
             self.screen.fill((255, 255, 255), im_rect)
@@ -127,16 +138,17 @@ class UI(UISkeleton):
         self.current_time = 0
         self.current_game_direction = action
 
-        action_name = self.params['ACTIONS']
+        action_name = self.params['ACTIONS'][str(self.current_game_direction)]
 
         self.current_image = None
         if action_name == 'LEFT':
-            self.current_image = pg.image.load(r'..\UIResources\left.png')
+            self.current_image = pg.image.load(r'UIResources\left.png')
 
         elif action_name == 'RIGHT':
-            self.current_image = pg.image.load(r'..\UIResources\right.png')
+            self.current_image = pg.image.load(r'UIResources\right.png')
 
         if self.current_image:
+            self.current_image = pg.transform.scale(self.current_image,(200,100))
             im_rect = self.current_image.get_rect(center=self.image_center)
             self.screen.blit(self.current_image, im_rect)
             pg.display.flip()
@@ -150,7 +162,11 @@ class UI(UISkeleton):
                 pg.display.flip()
                 time.sleep(self.blink_duration)
 
-        time.sleep(self.time_to_wait)
+        self.screen.fill((255, 255, 255), new_round_rect)
+        pg.display.flip()
+        pg.time.delay(self.time_to_wait * 1000)
+
+        # time.sleep(self.time_to_wait)
 
     def end_all_rounds(self):
         if self.round > self.params["ROUNDS_TO_PLAY"]:

@@ -84,10 +84,12 @@ class SignalReader:
                 self.stims = []
                 self.all_game_data = []
 
+            self.predicted_labels_to_game = []
             # restart window data, ##need to change if we want more
             self.window_data.clear()
             # start new game with random action
             self.int_action = np.random.randint(1, len(self.params["ACTIONS"]) + 1)
+
             self.UItest.new_game(self.int_action)
 
 

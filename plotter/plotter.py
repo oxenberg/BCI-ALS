@@ -15,15 +15,22 @@ class Plotter:
 
     def plot_label_dis(self):
         action_dict = self.params["ACTIONS"]
-        self.data["x_round_label"] = self.data[["game_index", "real_label"]].apply(lambda row:
-                                                                                   f"{row['game_index']},{action_dict[str(row['real_label'])]}")
+        # self.data["x_round_label"] = self.data[["game_index", "real_label"]].apply(lambda row:
+        #                                                                            f"{row['game_index']},{action_dict[str(row['real_label'])]}")
+        x_round_label = []
+        for index, row in self.data.iterrows():
+            x_label = f"{row['game_index']},{action_dict[str(row['real_label'])]}"
+            x_round_label.append(x_label)
 
+        self.data["pred_label_name"] = self.data["pred_label"].apply(lambda x : action_dict[str(x)])
+        self.data["x_round_label"] = x_round_label
         g = sns.catplot(
             data=self.data, kind="count",
-            x="x_round_label", hue="pred_label",
+            x="x_round_label", hue="pred_label_name",
             ci="sd", palette="dark", alpha=.6, height=6
         )
         g.legend.set_title("label distribution per game")
+        g.savefig("figures/label_distribution.png")
 
     def collect_data(self, game_index, predicted_labels, label):
         """
