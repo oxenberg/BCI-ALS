@@ -7,6 +7,7 @@ Created on Sun Dec 20 20:24:18 2020
 import matplotlib.pyplot as plt
 from mne.stats import bootstrap_confidence_interval
 from mne.baseline import rescale
+from pylsl import StreamInlet, resolve_stream
 
 from pyOpenBCI import OpenBCICyton
 import numpy as np
@@ -24,18 +25,20 @@ TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE*TIME_BETWEEN_EVENTS
 uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
 
 
-DATA_PATH = "data/"
-EXP_NAME = DATA_PATH+"Or_4_raw.fif" #: give name to the expirement
+DATA_PATH = "../data/"
+EXP_NAME = DATA_PATH+"Or_3_raw.fif" #: give name to the expirement
 
 
-EXPERIMENT_DURATION = 300
+EXPERIMENT_DURATION = 50
 ITER = {"COUNT" : 0} #for cout the time 
 ACTIONS = {1 : "LEFT",2 : "RIGHT",3 : "NONE"}
 
-RUN_EXP = True #: to collect data change to true
+RUN_EXP = False #: to collect data change to true
+streams = resolve_stream('type', 'EEG')
+inlet = StreamInlet(streams[0])
 
-if RUN_EXP:
-    board = OpenBCICyton(port='COM3', daisy=True)
+# if RUN_EXP:
+#     board = OpenBCICyton(port='COM3', daisy=True)
 start_time = time.time()
 current_time = start_time
 #########################
@@ -60,8 +63,11 @@ def create_raw_data(results, stim):
     return rawData
 
 
-def run_expirement(sample):
-    data = np.array(sample.channels_data)* uVolts_per_count
+def run_expirement():
+    data, timestamp = inlet.pull_sample()
+
+    data = np.array(data)
+    # data = np.array(sample.channels_data)* uVolts_per_count
     
     all_time = time.time() - start_time
     ITER["COUNT"] +=1
@@ -76,12 +82,19 @@ def run_expirement(sample):
     # print((all_time,event_time) )
     
     if int(all_time) >= EXPERIMENT_DURATION:
-        board.stop_stream()
+        # board.stop_stream()
+        return True
+
+    return False
     
 def start_expirement():
-    
-    board.start_stream(run_expirement)
-    board.disconnect()
+
+    while True:
+        if run_expirement():
+            break
+
+# board.start_stream(run_expirement)
+    # board.disconnect()
 
 
     
@@ -131,7 +144,7 @@ else:
     reject_criteria = dict(eeg=150e-6)       # 250 µV
     
     
-    epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.1, tmax=0.2,preload=True)
+    epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.2, tmax=1.5,preload=True)
     
     left_epochs = epochs['LEFT']
     right_epochs = epochs['RIGHT']
