@@ -172,9 +172,9 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
         if action_name == 'LEFT':
-            self.run_ssvep(float(11),6,6)
+            self.run_ssvep(freqz=float(11), posxx=6, posyy=6)
         elif action_name == 'RIGHT':
-            self.run_ssvep(freqz=float(11), posxx=1.5, posyy=6)
+            self.run_ssvep(freqz=float(17), posxx=1.5, posyy=6)
         elif action_name == 'NONE':
             self.dont_stop(breaks=10)  # May be unnecessary when _not_ simulating
 
