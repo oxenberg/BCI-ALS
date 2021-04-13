@@ -172,11 +172,11 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
         if action_name == 'LEFT':
-            flick.Flick(float(11)).flicker(win=self.screen, posx=6, posy=6)
+            self.run_ssvep(float(11),6,6)
         elif action_name == 'RIGHT':
-            flick.Flick(float(17)).flicker(win=self.screen, posx=1.5, posy=6)
+            self.run_ssvep(freqz=float(11), posxx=1.5, posyy=6)
         elif action_name == 'NONE':
-            self.dont_stop(breaks=10)
+            self.dont_stop(breaks=10)  # May be unnecessary when _not_ simulating
 
         pg.time.delay(self.time_to_wait * 1000)
         pg.event.get()
@@ -189,7 +189,6 @@ class UI(UISkeleton.UISkeletonClass):
             print("Starting break #" + str(i))
             pg.time.delay(round(delay / breaks))
         pg.event.get()
-
 
     def run_ssvep(self, freqz=1,posxx=1,posyy=1):
         flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy)
