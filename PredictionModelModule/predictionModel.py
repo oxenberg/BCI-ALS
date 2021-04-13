@@ -77,14 +77,14 @@ class PredictionModel:
         epochs = None
         data = np.array(data).T
         DATA_PATH = "data/"
-        EXP_NAME = DATA_PATH + "or_4_raw.fif"  ## file name to run the anaylsis on
+        EXP_NAME = DATA_PATH + "or_5_raw.fif"  ## file name to run the anaylsis on
         if read_from_file:
             raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
             epochs = self.create_epochs(raw)
         elif label == None:
             raw = self.create_raw_data(data)
             raw.drop_channels(drop_ch)
-            raw.filter(None, 40., fir_design='firwin', skip_by_annotation='edge')
+            raw.filter(2, 40., fir_design='firwin', skip_by_annotation='edge')
         else:
             raw = self.create_raw_data(data, label)
             raw.drop_channels(drop_ch)
@@ -93,24 +93,25 @@ class PredictionModel:
         return epochs, raw
 
     def train_mne_feature(self, data, labels, raw):
-        selected_features = ["std", "mean", "kurtosis", "skewness"]  # can be changed to any feature
+        selected_features = ["mean", "kurtosis", "skewness"]  # can be changed to any feature
         pipe = Pipeline([('fe', FeatureExtractor(sfreq=raw.info['sfreq'],
                                                  selected_funcs=selected_features)),
                          ('scalar', StandardScaler()),
-                         ('model', SGDClassifier())])
+                         ('model', SGDClassifier(max_iter=300,alpha=0.03,learning_rate='constant',
+                                                 eta0=0.01))])
         y = labels
         # params_grid = {'fe__app_entropy__emb': np.arange(2, 5)} #: can addd gradinet boost hyperparametrs
         params_grid = {}  #: can add gradinet boost hyperparametrs
-        gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                          cv=StratifiedKFold(n_splits=5), n_jobs=1,
-                          return_train_score=True)
-        gs.fit(data, y)
-        scores = pd.DataFrame(gs.cv_results_)
-        print(scores[['params', 'mean_test_score', 'mean_train_score']])
+        # gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
+        #                   cv=StratifiedKFold(n_splits=5), n_jobs=1,
+        #                   return_train_score=True)
+        pipe.fit(data, y)
+        # scores = pd.DataFrame(gs.cv_results_)
+        # print(scores[['params', 'mean_test_score', 'mean_train_score']])
         # Best parameters obtained with GridSearchCV:
-        print(gs.best_params_)
+        # print(gs.best_params_)
 
-        joblib.dump(gs.best_estimator_, MODEL_PATH)
+        joblib.dump(pipe, MODEL_PATH)
         return pipe
 
     def createInitialModel(self):

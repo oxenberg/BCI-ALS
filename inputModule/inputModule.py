@@ -10,6 +10,8 @@ from PredictionModelModule import PredictionModel
 from plotter import Plotter
 
 
+
+
 class SignalReader:
 
     def __init__(self):
@@ -23,6 +25,7 @@ class SignalReader:
         # windows for 1 prediction and for batch
         self.batch = {"X": [], "y": []}
         self.window_data = deque(maxlen=self.params["PREDICTION_WINDOW_SIZE"])  # this window have prediction data
+        self.expiriment_labels = self.create_lables()
 
         # modules initialization
         self.board = OpenBCICyton(port='COM3', daisy=True)
@@ -31,7 +34,13 @@ class SignalReader:
         self.plotter = Plotter(self.params["DEBUG"])
         self.counter = 0
 
-
+    def create_lables(self):
+        labels_list = []
+        ceil_num =  int(np.ceil(self.params["ROUNDS_TO_PLAY"] / 3))
+        for key in self.params["ACTIONS"]:
+            labels_list.extend([int(key)] * ceil_num)
+        np.random.shuffle(labels_list)
+        return labels_list
     def start_experiment(self, simulation = False):
         '''
         this function activate all the online experiment session and games.
@@ -90,8 +99,8 @@ class SignalReader:
             # restart window data, ##need to change if we want more
             self.window_data.clear()
             # start new game with random action
-            self.int_action = np.random.randint(1, len(self.params["ACTIONS"]) + 1)
-
+            # self.int_action = np.random.randint(1, len(self.params["ACTIONS"]) + 1)
+            self.int_action = self.expiriment_labels[self.UItest.get_round()-1]
             self.UItest.new_game(self.int_action)
 
 
