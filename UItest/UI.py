@@ -1,6 +1,10 @@
+import SSVEP.flick
 from UItest import UISkeleton
 import pygame as pg
 import time
+from SSVEP import flick
+from multiprocessing import Process
+
 
 from pygame.locals import (
     K_ESCAPE,
@@ -123,6 +127,9 @@ class UI(UISkeleton.UISkeletonClass):
 
     def new_game(self, action):
 
+        pg.font.init()  # had a problem with trying to access the font from another thread
+        self.font = pg.font.SysFont('Comic Sans MS', 30)
+
         new_round_surface = self.font.render('new round', False, (0, 0, 0))
         new_round_rect = new_round_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 8))
 
@@ -164,9 +171,28 @@ class UI(UISkeleton.UISkeletonClass):
 
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
-        pg.time.delay(self.time_to_wait * 1000)
+        if action_name == 'LEFT':
+            flick.Flick(float(11)).flicker(win=self.screen, posx=6, posy=6)
+        elif action_name == 'RIGHT':
+            flick.Flick(float(17)).flicker(win=self.screen, posx=1.5, posy=6)
+        elif action_name == 'NONE':
+            self.dont_stop(breaks=10)
 
+        pg.time.delay(self.time_to_wait * 1000)
+        pg.event.get()
         # time.sleep(self.time_to_wait)
+
+    def dont_stop(self, breaks=1):
+        delay = self.params['GAME_TIME_LIMIT'] - (self.blink_duration * self.blinks)
+        for i in range(breaks):
+            #pg.event.get()
+            print("Starting break #" + str(i))
+            pg.time.delay(round(delay / breaks))
+        pg.event.get()
+
+
+    def run_ssvep(self, freqz=1,posxx=1,posyy=1):
+        flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy)
 
     def end_all_rounds(self):
         if self.round > self.params["ROUNDS_TO_PLAY"]:
