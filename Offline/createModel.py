@@ -23,12 +23,11 @@ from sklearn.model_selection import (GridSearchCV, cross_val_score,
 
 from mne import Epochs, pick_types, events_from_annotations
 import mne
-from mne.decoding import (SlidingEstimator, GeneralizingEstimator, Scaler,
-                          cross_val_multiscore, LinearModel, get_coef,
-                          Vectorizer, CSP)
+from sklearn.svm import SVC
+
 
 DATA_PATH = "data/"
-EXP_NAME = DATA_PATH+"Or_3_raw.fif" ## file name to run the anaylsis on
+EXP_NAME = DATA_PATH+"Or_5_raw.fif" ## file name to run the anaylsis on
 
 features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'hjorth_complexity', 'hjorth_complexity_spect', 'hjorth_mobility',
@@ -39,7 +38,7 @@ features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'variance', 'wavelet_coef_energy', 'zero_crossings', 'max_cross_corr',
             'nonlin_interdep', 'phase_lock_val', 'spect_corr', 'time_corr']
 
-selected_features = ["std","mean","kurtosis","skewness"] # can be cgahnged to any feature
+selected_features = ["mean"] # can be cgahnged to any feature
 
 
 def preprocess():
@@ -69,14 +68,14 @@ def train_mne_feature(data,labels,raw):
     pipe = Pipeline([('fe', FeatureExtractor(sfreq = raw.info['sfreq'],
                                          selected_funcs = selected_features)),
                  ('scaler', StandardScaler()),
-                 ('clf', GradientBoostingClassifier())])
+                 ('clf', SVC(gamma='auto'))])
     y = labels
     
     # params_grid = {'fe__app_entropy__emb': np.arange(2, 5)} #: can addd gradinet boost hyperparametrs
-    params_grid = {} #: can addd gradinet boost hyperparametrs
+    params_grid = {"clf__C": [0.1,0.2,0.3]} #: can addd gradinet boost hyperparametrs
 
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=5, random_state=42), n_jobs=1,
+                      cv=StratifiedKFold(n_splits=5), n_jobs=1,
                       return_train_score=True)
     gs.fit(data, y)
     
@@ -113,10 +112,10 @@ def main():
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
     
     
-    return pipe,epochs_data_train
+    return pipe,transformed_data
 
 if __name__ == '__main__':
-    pipe,epochs_data_train = main()
+    pipe,transformed_data = main()
     
 
 
