@@ -191,7 +191,7 @@ class UI(UISkeleton.UISkeletonClass):
         pg.event.get()
 
     def run_ssvep(self, freqz=1,posxx=1,posyy=1):
-        flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy)
+        flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy, offline=False)
 
     def end_all_rounds(self):
         if self.round > self.params["ROUNDS_TO_PLAY"]:

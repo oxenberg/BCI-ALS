@@ -177,7 +177,7 @@ class UI(UISkeleton.UISkeletonClass):
         # elif action_name == 'NONE':
         #    self.dont_stop(breaks=10)  # May be unnecessary when _not_ simulating
 
-        pg.time.delay(self.time_to_wait * 1000)
+        #pg.time.delay(self.time_to_wait * 1000)
         pg.event.get()
         # time.sleep(self.time_to_wait)
 
