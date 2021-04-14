@@ -13,7 +13,7 @@ import numpy as np
 import mne
 import random
 import time
-import offlineUI
+from Offline.offlineUI import UI
 from inputModule import read_params
 
 
@@ -26,14 +26,14 @@ uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
 
 
 DATA_PATH = "../data/"
-EXP_NAME = DATA_PATH+"Or_5_raw.fif" #: give name to the expirement
+EXP_NAME = DATA_PATH+"Or_6_raw.fif" #: give name to the expirement
 
 
 EXPERIMENT_DURATION = 300
 ITER = {"COUNT" : 0} #for cout the time 
 ACTIONS = {1 : "LEFT",2 : "RIGHT",3 : "NONE"}
 
-RUN_EXP = False #: to collect data change to true
+RUN_EXP = True #: to collect data change to true
 
 if RUN_EXP:
     board = OpenBCICyton(port='COM3', daisy = True)
@@ -48,7 +48,7 @@ stim  = []
 #: create the raw object from array
 
 def create_raw_data(results, stim):
-    ch_names = ['EEG ' + str(ID) for ID in range(CH_AMOUNT)]
+    ch_names = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2', 'F7', 'F8', 'F3', 'F4', 'T7', 'T8', 'P3', 'P4']
     ch_type = 'eeg'
     info = mne.create_info(ch_names,SAMPLE_RATE,ch_type)
     rawData = mne.io.RawArray(results,info)
@@ -69,7 +69,7 @@ def run_expirement(sample):
     if ITER["COUNT"]% TIME_BETWEEN_EVENTS_RATE == 0 :
          int_action = random.randint(1, 3)
          print(ACTIONS[int_action])
-         UIO.new_game(ACTIONS[int_action])
+         UIO.new_game(int_action)
          stim.append(int_action)
     else:
         stim.append(0)
@@ -83,7 +83,7 @@ def run_expirement(sample):
 def start_expirement():
 
     global UIO
-    UIO = offlineUI()
+    UIO = UI()
     board.start_stream(run_expirement)
     board.disconnect()
 
@@ -106,7 +106,7 @@ if RUN_EXP:
     
     #: mainualy filtering
     events = mne.find_events(rawData, stim_channel='STI')
-    
+
     
     annot_from_events = mne.annotations_from_events(
         events=events, event_desc=ACTIONS, sfreq=rawData.info['sfreq'])

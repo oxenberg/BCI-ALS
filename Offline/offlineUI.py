@@ -3,8 +3,7 @@ from UItest import UISkeleton
 import pygame as pg
 import time
 from SSVEP import flick
-import collectData
-from multiprocessing import Process
+
 
 
 from pygame.locals import (
@@ -207,6 +206,6 @@ class UI(UISkeleton.UISkeletonClass):
         return False
 
 
-if __name__ == '__main__':
-    ui = UI()
+# if __name__ == '__main__':
+#     ui = UI()
 
