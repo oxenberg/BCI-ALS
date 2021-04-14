@@ -13,6 +13,7 @@ import numpy as np
 import mne
 import random
 import time
+import offlineUI
 from inputModule import read_params
 
 
@@ -68,6 +69,7 @@ def run_expirement(sample):
     if ITER["COUNT"]% TIME_BETWEEN_EVENTS_RATE == 0 :
          int_action = random.randint(1, 3)
          print(ACTIONS[int_action])
+         UIO.new_game(ACTIONS[int_action])
          stim.append(int_action)
     else:
         stim.append(0)
@@ -80,11 +82,12 @@ def run_expirement(sample):
     
 def start_expirement():
 
+    global UIO
+    UIO = offlineUI()
     board.start_stream(run_expirement)
     board.disconnect()
 
 
-    
 if RUN_EXP:
     start_expirement()
     
