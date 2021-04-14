@@ -1,4 +1,5 @@
 import pygame
+from pygame import Surface, Rect
 from pygame.locals import *
 from SSVEP import checkerboard
 from numpy import mean
@@ -85,7 +86,7 @@ class Flick:
             duration = time_between
         if duration != 0:
             window = win  #  pygame.display.set_mode((1920, 1080), 0)
-            self.board_pos = (GetSystemMetrics(0)/posx, GetSystemMetrics(1)/posy)
+            self.board_pos = (800/posx, 600/posy)
             print(f"flicker duration {duration}")
             pygame.time.set_timer(timer_event, duration)
         else:
@@ -115,6 +116,7 @@ class Flick:
                 if event.type == timer_event:
                     # pygame.quit()
                     print("end round")
+                    pygame.time.set_timer(timer_event, 0)
                     break_this = True
                     break
                     return False
@@ -127,3 +129,4 @@ class Flick:
             pygame.display.update()
             time.sleep(period)
             period = 1./self._freq_controller(clock, _freq_array)
+

@@ -1,10 +1,12 @@
 import SSVEP.flick
 from UItest import UISkeleton
 import pygame as pg
+from pygame import Surface
 import time
 from SSVEP import flick
 from multiprocessing import Process
-
+from win32api import GetSystemMetrics
+import os
 
 from pygame.locals import (
     K_ESCAPE,
@@ -21,12 +23,13 @@ class UI(UISkeleton.UISkeletonClass):
         pg.init()
 
         # Define constants for the screen width and height
-        self.screen_width = 800
-        self.screen_height = 600
+        self.screen_width = 800  # GetSystemMetrics(0)
+        self.screen_height = 600  #GetSystemMetrics(1)
 
         # Create the screen object
         # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
-        self.screen = pg.display.set_mode((self.screen_width, self.screen_height))
+
+        self.screen = pg.display.set_mode((800,600))
 
         # Fill the screen with white
         self.screen.fill((255, 255, 255))
@@ -161,6 +164,17 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.blit(self.current_image, im_rect)
         pg.display.flip()
 
+
+        surf = Surface((125, 100))
+        surf.fill((255, 255, 255))
+        pg.display.update()
+        self.screen.blit(surf, (133, 100))
+        pg.display.flip()
+        surf1 = Surface((125, 100))
+        surf1.fill((255, 255, 255))
+        pg.display.update()
+        self.screen.blit(surf1, (533, 100))
+        pg.display.flip()
         for i in range(self.blinks):
             self.screen.fill((255, 255, 255), im_rect)
             pg.display.flip()
@@ -168,6 +182,7 @@ class UI(UISkeleton.UISkeletonClass):
             self.screen.blit(self.current_image, im_rect)
             pg.display.flip()
             time.sleep(self.blink_duration)
+
 
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()

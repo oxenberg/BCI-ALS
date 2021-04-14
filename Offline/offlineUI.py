@@ -1,6 +1,7 @@
 import SSVEP.flick
 from UItest import UISkeleton
 import pygame as pg
+from pygame import Surface
 import time
 from SSVEP import flick
 from win32api import GetSystemMetrics
@@ -163,6 +164,16 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.blit(self.current_image, im_rect)
         pg.display.flip()
 
+        surf = Surface((125, 100))
+        surf.fill((255, 255, 255))
+        pg.display.update()
+        self.screen.blit(surf, (133, 100))
+        pg.display.flip()
+        surf1 = Surface((125, 100))
+        surf1.fill((255, 255, 255))
+        pg.display.update()
+        self.screen.blit(surf1, (533, 100))
+        pg.display.flip()
         # for i in range(self.blinks):
         #     self.screen.fill((255, 255, 255), im_rect)
         #     pg.display.flip()
@@ -179,8 +190,8 @@ class UI(UISkeleton.UISkeletonClass):
         elif action_name == 'RIGHT':
             self.run_ssvep(freqz=float(17), posxx=1.5, posyy=6,time_bet=time_between)
         elif action_name == 'NONE':
-            self.run_ssvep(freqz=float(15), posxx=0.1, posyy=6, time_bet=time_between) # "displays" SSVEP stim off-screen, this is just for timing
-        #    self.dont_stop(breaks=10)  # May be unnecessary when _not_ simulating
+            # self.run_ssvep(freqz=float(15), posxx=0.1, posyy=6, time_bet=time_between) # "displays" SSVEP stim off-screen, this is just for timing
+            self.dont_stop(breaks=10, dele=time_between)  # May be unnecessary when _not_ simulating
 
         #pg.time.delay(self.time_to_wait * 1000)
         pg.event.get()
@@ -188,13 +199,13 @@ class UI(UISkeleton.UISkeletonClass):
 
 
 
-    # def dont_stop(self, breaks=1):
-    #     delay = collectData.EXPERIMENT_DURATION - (self.blink_duration * self.blinks)
-    #     for i in range(breaks):
-    #         #pg.event.get()
-    #         print("Starting break #" + str(i))
-    #         pg.time.delay(round(delay / breaks))
-    #     pg.event.get()
+    def dont_stop(self, breaks=1, dele=0):
+        delay = dele  # collectData.EXPERIMENT_DURATION - (self.blink_duration * self.blinks)
+        for i in range(breaks):
+            #pg.event.get()
+            print("Starting break #" + str(i))
+            pg.time.delay(round(delay / breaks))
+        pg.event.get()
 
     def run_ssvep(self, freqz=1,posxx=1,posyy=1, off = True, time_bet = 0):
         flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy,offline = off, time_between = time_bet)

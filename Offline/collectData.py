@@ -33,7 +33,7 @@ EXPERIMENT_DURATION = 300
 ITER = {"COUNT" : 0} #for cout the time 
 ACTIONS = {1 : "LEFT",2 : "RIGHT",3 : "NONE"}
 
-RUN_EXP = True #: to collect data change to true
+RUN_EXP = False #: to collect data change to true
 
 if RUN_EXP:
     board = OpenBCICyton(port='COM3', daisy = True)
