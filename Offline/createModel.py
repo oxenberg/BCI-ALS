@@ -58,7 +58,20 @@ def preprocess():
 
     return epochs,raw
 
-#
+def compute_medfilt(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    return medfilt(arr, kernel_size=(1, 5)).ravel()
+
+
 def train_mne_feature(data,labels,raw):
     pipe = Pipeline([('fe', FeatureExtractor(sfreq = raw.info['sfreq'],
                                          selected_funcs = selected_features)),
