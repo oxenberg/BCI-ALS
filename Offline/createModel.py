@@ -58,32 +58,32 @@ def preprocess():
 
     return epochs,raw
 
-def compute_medfilt(arr):
-    """Median filtered signal as features.
-
-    Parameters
-    ----------
-    arr : ndarray, shape (n_channels, n_times)
-
-    Returns
-    -------
-    output : (n_channels * n_times,)
-    """
-    return medfilt(arr, kernel_size=(1, 5)).ravel()
+# TODO add function the get power band features
+# def compute_medfilt(arr):
+#     """Median filtered signal as features.
+#
+#     Parameters
+#     ----------
+#     arr : ndarray, shape (n_channels, n_times)
+#
+#     Returns
+#     -------
+#     output : (n_channels * n_times,)
+#     """
+#     return medfilt(arr, kernel_size=(1, 5)).ravel()
 
 
 def train_mne_feature(data,labels,raw):
     pipe = Pipeline([('fe', FeatureExtractor(sfreq = raw.info['sfreq'],
                                          selected_funcs = selected_features)),
                  ('scaler', StandardScaler()),
-                 ('clf', GradientBoostingClassifier())])
+                 ('clf', SGDClassifier())])
     y = labels
 
     # params_grid = {'fe__app_entropy__emb': np.arange(2, 5)} #: can addd gradinet boost hyperparametrs
-    # params_grid = {"clf__penalty": ["l1","l2"], "clf__alpha" : [0.002,0.003,0.004,0.005,0.01,0.1],
-    #                "clf__max_iter" : [100,200,300,400,500,1000]} #: can addd gradinet boost hyperparametrs
-    params_grid = {"clf__n_estimators": [10,20,40,80], "clf__learning_rate" : [0.001,0.01,0.05,0.1],
-                   "clf__max_features" : [12,"auto"], "clf__subsample" : [0.1,0.4,0.2]}
+    params_grid = {"clf__penalty": ["l1","l2"], "clf__alpha" : [0.002,0.003,0.004,0.005,0.01,0.1],
+                   "clf__max_iter" : [100,200,300,400,500,1000]} #: can addd gradinet boost hyperparametrs
+
     # params_grid = {} #: can addd gradinet boost hyperparametrs
 
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
@@ -138,6 +138,11 @@ def train_mne_feature_stack(data,labels,raw):
     print(gs.best_params_)
 
     return pipe,scores
+
+
+# TODO add power band
+# https://mne.tools/mne-features/auto_examples/plot_user_defined_function.html#sphx-glr-auto-examples-plot-user-defined-function-py
+# selected_features = [("my_func",compute_medfilt),"mean",'kurtosis','skewness'] # can be cgahnged to any feature
 
 
 def main():

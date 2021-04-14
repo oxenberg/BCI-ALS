@@ -3,7 +3,9 @@ from UItest import UISkeleton
 import pygame as pg
 import time
 from SSVEP import flick
+from win32api import GetSystemMetrics
 
+import os
 
 
 from pygame.locals import (
@@ -17,16 +19,17 @@ class UI(UISkeleton.UISkeletonClass):
     def __init__(self):
         UISkeleton.UISkeletonClass.__init__(self)
 
+
         # Initialize pygame
         pg.init()
 
         # Define constants for the screen width and height
-        self.screen_width = 800
-        self.screen_height = 600
+        self.screen_width = GetSystemMetrics(0)
+        self.screen_height = GetSystemMetrics(1)
 
         # Create the screen object
         # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
-        self.screen = pg.display.set_mode((self.screen_width, self.screen_height))
+        self.screen = pg.display.set_mode((self.screen_width, self.screen_height),pg.FULLSCREEN)
 
         # Fill the screen with white
         self.screen.fill((255, 255, 255))
