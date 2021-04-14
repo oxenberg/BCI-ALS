@@ -152,7 +152,6 @@ class UI(UISkeleton.UISkeletonClass):
 
         elif action_name == 'RIGHT':
             self.current_image = pg.image.load(r'UIResources\right.png')
-
         else:
             self.current_image = pg.image.load(r'UIResources\idle.png')
 
@@ -192,8 +191,8 @@ class UI(UISkeleton.UISkeletonClass):
     #         pg.time.delay(round(delay / breaks))
     #     pg.event.get()
 
-    def run_ssvep(self, freqz=1,posxx=1,posyy=1):
-        flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy)
+    def run_ssvep(self, freqz=1,posxx=1,posyy=1, off = True, time_bet = 0):
+        flick.Flick(float(freqz)).flicker(win=self.screen, posx=posxx, posy=posyy,offline = off, time_between = time_bet)
 
     def end_all_rounds(self):
         if self.round > self.params["ROUNDS_TO_PLAY"]:

@@ -67,7 +67,7 @@ class Flick:
         return False
 
 
-    def flicker(self, win = pygame.display.set_mode((1920, 1080), 0), posx = 3, posy=3):
+    def flicker(self, win = pygame.display.set_mode((1920, 1080), 0), posx = 3, posy=3, offline = True, time_between = 0):
         """
         |   Opens a window and animates a flickering checkerboard
         |   Input:
@@ -79,7 +79,10 @@ class Flick:
         _freq_array = []
         timer_event = USEREVENT + 1
         #self._set_window_position()
-        duration = self.params["GAME_TIME_LIMIT"]
+        if not offline:
+            duration = self.params["GAME_TIME_LIMIT"]
+        else:
+            duration = time_between
         if duration != 0:
             window = win  #  pygame.display.set_mode((1920, 1080), 0)
             self.board_pos = (800/posx, 600/posy)
