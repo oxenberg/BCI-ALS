@@ -69,7 +69,7 @@ def run_expirement(sample):
     if ITER["COUNT"]% TIME_BETWEEN_EVENTS_RATE == 0 :
          int_action = random.randint(1, 3)
          print(ACTIONS[int_action])
-         UIO.new_game(action=int_action,time_between=TIME_BETWEEN_EVENTS_RATE)
+         UIO.new_game(action=int_action,time_between=TIME_BETWEEN_EVENTS*1000)
          stim.append(int_action)
     else:
         stim.append(0)

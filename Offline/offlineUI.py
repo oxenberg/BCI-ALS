@@ -160,13 +160,14 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.blit(self.current_image, im_rect)
         pg.display.flip()
 
-        for i in range(self.blinks):
-            self.screen.fill((255, 255, 255), im_rect)
-            pg.display.flip()
-            time.sleep(self.blink_duration)
-            self.screen.blit(self.current_image, im_rect)
-            pg.display.flip()
-            time.sleep(self.blink_duration)
+        # for i in range(self.blinks):
+        #     self.screen.fill((255, 255, 255), im_rect)
+        #     pg.display.flip()
+        #     time.sleep(self.blink_duration)
+        #     self.screen.blit(self.current_image, im_rect)
+        #     pg.display.flip()
+        #     time.sleep(self.blink_duration)
+
 
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
