@@ -136,7 +136,7 @@ def main():
     # get MEG and EEG data
     epochs_data_train = epochs.get_data()
             
-    pipe,scores = train_mne_feature_stack(epochs_data_train,labels,raw)
+    pipe,scores = train_mne_feature(epochs_data_train,labels,raw)
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
     
