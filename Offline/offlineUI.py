@@ -125,7 +125,7 @@ class UI(UISkeleton.UISkeletonClass):
     # def bar_is_full(self):
     #     return self.progress == self.params['BAR_MAX']
 
-    def new_game(self, action):
+    def new_game(self, action, time_between=0):
 
         pg.font.init()  # had a problem with trying to access the font from another thread
         self.font = pg.font.SysFont('Comic Sans MS', 30)
@@ -171,9 +171,9 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
         if action_name == 'LEFT':
-            self.run_ssvep(freqz=float(11), posxx=6, posyy=6)
+            self.run_ssvep(freqz=float(11), posxx=6, posyy=6,time_bet=time_between)
         elif action_name == 'RIGHT':
-            self.run_ssvep(freqz=float(17), posxx=1.5, posyy=6)
+            self.run_ssvep(freqz=float(17), posxx=1.5, posyy=6,time_bet=time_between)
         # elif action_name == 'NONE':
         #    self.dont_stop(breaks=10)  # May be unnecessary when _not_ simulating
 
