@@ -5,7 +5,7 @@ from numpy import mean
 import time
 import os
 import sys
-
+from win32api import GetSystemMetrics
 pygame.init()
 pygame.font.init()
 from inputModule.utils import read_params
@@ -98,6 +98,7 @@ class Flick:
         break_this = False
         while not break_this:
             for event in pygame.event.get():
+                print("new pygame event")
                 if event.type == QUIT:
                     # pygame.quit()
                     # sys.exit()
