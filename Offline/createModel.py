@@ -8,9 +8,10 @@ Created on Mon Dec 21 21:38:29 2020
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import scipy
+import numpy as np
 from mne_features.feature_extraction import FeatureExtractor
-
+from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.linear_model import SGDClassifier, LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -23,6 +24,10 @@ from sklearn.svm import SVC, LinearSVC
 
 DATA_PATH = "data/"
 EXP_NAME = DATA_PATH+"Or_5_raw.fif" ## file name to run the anaylsis on
+FS = 125 # sampling rate
+T = 1/FS # sample time
+
+cutoff = [0.5,4.0,7.0,12.0,30.0,45] # take the frq band from here
 
 features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'hjorth_complexity', 'hjorth_complexity_spect', 'hjorth_mobility',
@@ -33,7 +38,6 @@ features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'variance', 'wavelet_coef_energy', 'zero_crossings', 'max_cross_corr',
             'nonlin_interdep', 'phase_lock_val', 'spect_corr', 'time_corr']
 
-selected_features = ["mean",'kurtosis','skewness'] # can be cgahnged to any feature
 
 
 def preprocess():
@@ -59,18 +63,30 @@ def preprocess():
     return epochs,raw
 
 # TODO add function the get power band features
-# def compute_medfilt(arr):
-#     """Median filtered signal as features.
-#
-#     Parameters
-#     ----------
-#     arr : ndarray, shape (n_channels, n_times)
-#
-#     Returns
-#     -------
-#     output : (n_channels * n_times,)
-#     """
-#     return medfilt(arr, kernel_size=(1, 5)).ravel()
+def power_band(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    len_eeg = len(arr[0])
+
+    fft = scipy.fft.fft(arr)
+    f = np.linspace(0, FS, len_eeg, endpoint=False)
+
+    power_band = []
+    for index in range(len(cutoff)-1):
+        chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+        fft_chosen_freq = fft[:, chosen_freq]
+        power_band.append(abs(fft_chosen_freq.mean()))
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
 
 
 def train_mne_feature(data,labels,raw):
@@ -108,26 +124,23 @@ def train_mne_feature(data,labels,raw):
     return pipe,scores
 
 def train_mne_feature_stack(data,labels,raw):
-
+    n_estimators = [50, 100, 200]
+    max_depth = [4, 5, 6]
 
 
     estimators = [
-        ('rf', Pipeline([('fe', FeatureExtractor(sfreq=raw.info['sfreq'],
-                                      selected_funcs=selected_features)),
-              ('scaler', StandardScaler()),
-              ('clf', RandomForestClassifier(n_estimators=10, random_state=42))])),
-        ('svr', Pipeline([('fe', FeatureExtractor(sfreq=raw.info['sfreq'],
-                                      selected_funcs=selected_features)),
-              ('scaler', StandardScaler()),
-              ('clf', RandomForestClassifier(n_estimators=10, random_state=42))]))]
+        ('rf', RandomForestClassifier(n_estimators=10, random_state=42)),
+        ('SGD',SGDClassifier())]
     clf = StackingClassifier(
         estimators=estimators, final_estimator=LogisticRegression(),cv=5
     )
     pipe = Pipeline([('fe', FeatureExtractor(sfreq=raw.info['sfreq'],
                                              selected_funcs=selected_features)),
                      ('scaler', StandardScaler()),
-                     ('clf', clf())])
-    params_grid = {}
+                     ('clf', clf)])
+    params_grid = {"clf__SGD__penalty": ["l1", "l2"], "clf__SGD__alpha": [0.002, 0.003, 0.004, 0.005, 0.01, 0.1],
+                   "clf__SGD__max_iter": [100, 200, 300, 400, 500, 1000], "clf__rf__n_estimators" : n_estimators,
+                   "clf__rf__max_depth" :max_depth}
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
                       cv=StratifiedKFold(n_splits=5), n_jobs=1,
                       return_train_score=True)
@@ -145,6 +158,10 @@ def train_mne_feature_stack(data,labels,raw):
 # selected_features = [("my_func",compute_medfilt),"mean",'kurtosis','skewness'] # can be cgahnged to any feature
 
 
+selected_features = [('power_band', power_band)] # can be changed to any feature
+
+# selected_features = ["mean",'kurtosis','skewness',('power_band', compute_medfilt)] # can be cgahnged to any feature
+
 def main():
     epochs,raw =  preprocess()
     
@@ -154,7 +171,7 @@ def main():
     # get MEG and EEG data
     epochs_data_train = epochs.get_data()
             
-    pipe,scores = train_mne_feature(epochs_data_train,labels,raw)
+    pipe,scores = train_mne_feature_stack(epochs_data_train,labels,raw)
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
     
