@@ -5,6 +5,7 @@ from pygame import Surface
 import time
 from SSVEP import flick
 from win32api import GetSystemMetrics
+from inputModule.utils import read_params
 
 import os
 
@@ -20,6 +21,7 @@ class UI(UISkeleton.UISkeletonClass):
     def __init__(self):
         UISkeleton.UISkeletonClass.__init__(self)
 
+        self.params = read_params(name="params_offline.JSON")
 
         # Initialize pygame
         pg.init()
@@ -45,8 +47,8 @@ class UI(UISkeleton.UISkeletonClass):
         #                    'border_color': (0, 0, 0), 'bar_color': (0, 128, 0)}
 
         # # used for pre-trial stimulus
-        self.blinks = 3
-        self.blink_duration = 0.333
+        self.blinks = self.params["BLINK_DURATION"]*3
+        self.blink_duration = 1/self.blinks
 
         # arrow image parameters
         self.current_image = None
