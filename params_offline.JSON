@@ -1,0 +1,13 @@
+{
+  "TIME_BETWEEN_EVENTS" : 8,
+  "CH_AMOUNT":  16,
+  "SAMPLE_RATE": 125,
+  "DATA_PATH" :  "./data/",
+  "ACTIONS" : {"1": "LEFT", "2": "RIGHT", "3": "NONE"},
+  "BLINK_DURATION" : 1,
+  "EXPERIMENT_DURATION" : 300,
+  "port" : "COM3",
+  "RUN_EXP" : 0,
+  "EXP_FILE_NAME" : "Or_5_raw.fif",
+  "ch_names" : ["Fp1", "Fp2", "C3", "C4", "P7", "P8", "O1", "O2", "F7", "F8", "F3", "F4", "T7", "T8", "P3", "P4"]
+}
