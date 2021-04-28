@@ -20,14 +20,17 @@ from sklearn.model_selection import (GridSearchCV, cross_val_score,
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, StackingClassifier
 from mne import Epochs, pick_types, events_from_annotations
 import mne
+from scipy import signal
+
 from sklearn.svm import SVC, LinearSVC
 
 DATA_PATH = "data/"
 EXP_NAME = DATA_PATH+"Or_5_raw.fif" ## file name to run the anaylsis on
 FS = 125 # sampling rate
 T = 1/FS # sample time
+tmin, tmax = -0.8, 1  # TODO change to: 1.2, 6
 
-cutoff = [0.5,4.0,7.0,12.0,30.0,45] # take the frq band from here
+cutoff = [1,30] # take the frq band from here
 
 features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'hjorth_complexity', 'hjorth_complexity_spect', 'hjorth_mobility',
@@ -41,11 +44,11 @@ features = ['app_entropy', 'decorr_time', 'higuchi_fd',
 
 
 def preprocess():
+    # assuming zero means the instant moment when the cue starts
+    # blinking to let the subject know which direction to do the MI, and blink duration is 1 sec
 
-    tmin, tmax = -1, 0.8 #: need to check the best
-    
     raw = mne.io.read_raw_fif(EXP_NAME, preload=True)
-    
+
     raw.filter(None, 40., fir_design='firwin', skip_by_annotation='edge')
     
     events = mne.find_events(raw, 'STI')
@@ -74,16 +77,27 @@ def power_band(arr):
     -------
     output : (n_channels * n_times,)
     """
+    times_index = [[-0.1,0.22],[0.7,1]]
+
     len_eeg = len(arr[0])
 
-    fft = scipy.fft.fft(arr)
-    f = np.linspace(0, FS, len_eeg, endpoint=False)
+    freqs, times, spectrogram = signal.spectrogram(arr[:2], fs=125,nperseg = 10)
 
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
     power_band = []
     for index in range(len(cutoff)-1):
-        chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
-        fft_chosen_freq = fft[:, chosen_freq]
-        power_band.append(abs(fft_chosen_freq.mean()))
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff[index]) & (freqs < cutoff[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,chosen_times[:,np.newaxis]].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
 
     power_band = np.array(power_band)
     return np.array(power_band)
@@ -104,7 +118,7 @@ def train_mne_feature(data,labels,raw):
 
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
                       cv=StratifiedKFold(n_splits=5), n_jobs=1,
-                      return_train_score=True)
+                      return_train_score=True,verbose=10)
     gs.fit(data, y)
 
 
@@ -124,26 +138,29 @@ def train_mne_feature(data,labels,raw):
     return pipe,scores
 
 def train_mne_feature_stack(data,labels,raw):
-    n_estimators = [50, 100, 200]
-    max_depth = [4, 5, 6]
-
+    n_estimators = [50, 200]
+    max_depth = [4]
+    solvers = ['newton-cg', 'lbfgs', 'liblinear']
+    penalty = ['l2']
+    c_values = [100, 10, 1.0, 0.1, 0.01]
 
     estimators = [
         ('rf', RandomForestClassifier(n_estimators=10, random_state=42)),
         ('SGD',SGDClassifier())]
     clf = StackingClassifier(
-        estimators=estimators, final_estimator=LogisticRegression(),cv=5
+        estimators=estimators, final_estimator=LogisticRegression()
     )
     pipe = Pipeline([('fe', FeatureExtractor(sfreq=raw.info['sfreq'],
                                              selected_funcs=selected_features)),
                      ('scaler', StandardScaler()),
                      ('clf', clf)])
-    params_grid = {"clf__SGD__penalty": ["l1", "l2"], "clf__SGD__alpha": [0.002, 0.003, 0.004, 0.005, 0.01, 0.1],
-                   "clf__SGD__max_iter": [100, 200, 300, 400, 500, 1000], "clf__rf__n_estimators" : n_estimators,
-                   "clf__rf__max_depth" :max_depth}
+    params_grid = {"clf__SGD__penalty": ["l1", "l2"], "clf__SGD__alpha": [0.003, 0.004],
+                   "clf__SGD__max_iter": [100, 200, 300, 400, 500], "clf__rf__n_estimators" : n_estimators,
+                   "clf__rf__max_depth" :max_depth, "clf__final_estimator__solver" : solvers,
+                   "clf__final_estimator__penalty" : penalty,"clf__final_estimator__C" : c_values}
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=5), n_jobs=1,
-                      return_train_score=True)
+                      cv=StratifiedKFold(n_splits=5),
+                      return_train_score=True, verbose=10)
     gs.fit(data, labels)
     scores = pd.DataFrame(gs.cv_results_)
     print(scores[['params', 'mean_test_score', 'mean_train_score']])
@@ -171,7 +188,7 @@ def main():
     # get MEG and EEG data
     epochs_data_train = epochs.get_data()
             
-    pipe,scores = train_mne_feature_stack(epochs_data_train,labels,raw)
+    pipe,scores = train_mne_feature(epochs_data_train,labels,raw)
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
     

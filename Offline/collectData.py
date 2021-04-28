@@ -18,7 +18,7 @@ from inputModule import read_params
 
 
 CH_AMOUNT = 16
-TIME_BETWEEN_EVENTS = 3
+TIME_BETWEEN_EVENTS = 8  # in seconds
 SAMPLE_RATE = 125
 TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE*TIME_BETWEEN_EVENTS
 
@@ -26,8 +26,8 @@ uVolts_per_count = (4500000)/24/(2**23-1) #uV/count
 
 
 DATA_PATH = "../data/"
-EXP_NAME = DATA_PATH+"Or_6_raw.fif" #: give name to the expirement
-
+EXP_NAME = DATA_PATH+"Or_5_raw.fif" #: give name to the expirement
+ch_names = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2', 'F7', 'F8', 'F3', 'F4', 'T7', 'T8', 'P3', 'P4']
 
 EXPERIMENT_DURATION = 300
 ITER = {"COUNT" : 0} #for cout the time 
@@ -48,7 +48,6 @@ stim  = []
 #: create the raw object from array
 
 def create_raw_data(results, stim):
-    ch_names = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2', 'F7', 'F8', 'F3', 'F4', 'T7', 'T8', 'P3', 'P4']
     ch_type = 'eeg'
     info = mne.create_info(ch_names,SAMPLE_RATE,ch_type)
     rawData = mne.io.RawArray(results,info)
@@ -70,6 +69,7 @@ def run_expirement(sample):
          int_action = random.randint(1, 3)
          print(ACTIONS[int_action])
          UIO.new_game(action=int_action,time_between=TIME_BETWEEN_EVENTS*1000)
+         print("")
          stim.append(int_action)
     else:
         stim.append(0)
@@ -120,73 +120,73 @@ if RUN_EXP:
 else:
     rawData = mne.io.read_raw_fif(EXP_NAME, preload=True)
     # rawData = rawData.filter(1, 45., fir_design='firwin')
-
+    print(rawData.info)
     events = mne.find_events(rawData, stim_channel='STI')
 
     event_dict = {'LEFT': 1, 'RIGHT': 2, 'NONE': 3}
     
-    
+
     rawData.plot_psd(fmax=50,spatial_colors = True)
-    
-    
+
+
     fig = mne.viz.plot_events(events,event_id  = event_dict, sfreq=rawData.info['sfreq'],
                               first_samp=rawData.first_samp)
-    
+
     reject_criteria = dict(eeg=150e-6)       # 250 µV
-    
-    
+
+
     epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.2, tmax=1.5,preload=True)
-    
+
     left_epochs = epochs['LEFT']
     right_epochs = epochs['RIGHT']
     none_epochs = epochs['NONE']
-    
-    
+
+
     left_epochs = left_epochs.average()
     right_epochs = right_epochs.average()
     none_epochs = none_epochs.average()
-    
+
     mne.viz.plot_compare_evokeds(dict(left=left_epochs, right=right_epochs,nothing = none_epochs),
                                   legend='upper left', show_sensors='upper right')
-    
-    
+
+
 
     epochs.plot_image(combine='mean')
     event_id, tmin, tmax = 1, -0.5, 3.
     baseline = None
-    
+
     iter_freqs = [
         ('Theta', 4, 7),
         ('Alpha', 8, 12),
         ('Beta', 13, 25),
         ('Gamma', 30, 45)
     ]
-    
+
     frequency_map = list()
-    
+
     for band, fmin, fmax in iter_freqs:
         # bandpass filter
         raw = rawData.copy()
-        
+
         raw.filter(fmin, fmax, n_jobs=1,  # use more jobs to speed up.
                    l_trans_bandwidth=1,  # make sure filter params are the same
                    h_trans_bandwidth=1)  # in each band and skip "auto" option.
-    
+
         # epoch
         epochs = mne.Epochs(raw, events, event_id, tmin, tmax, baseline=baseline,
                             preload=True)
         # remove evoked response
         epochs.subtract_evoked()
-    
+
         # get analytic signal (envelope)
         epochs.apply_hilbert(envelope=True)
         frequency_map.append(((band, fmin, fmax), epochs.average()))
-    
+
     def stat_fun(x):
         """Return sum of squares."""
         return np.sum(x ** 2, axis=0)
-    
-    
+
+
     # Plot
     fig, axes = plt.subplots(4, 1, figsize=(10, 7), sharex=True, sharey=True)
     colors = plt.get_cmap('winter_r')(np.linspace(0, 1, 4))
@@ -209,8 +209,21 @@ else:
                     horizontalalignment='right',
                     xycoords='axes fraction')
         ax.set_xlim(-500, 3000)
-    
+
     axes.ravel()[-1].set_xlabel('Time [ms]')
+
+
+
+    # spectrogram
+    frequencies = np.arange(2, 40, 0.1)
+    epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.8, tmax=3,preload=True)
+
+    for event_id in event_dict.keys():
+        event_id_epochs = epochs[event_id]
+        power = mne.time_frequency.tfr_morlet(event_id_epochs, n_cycles=2, return_itc=False,
+                                              freqs=frequencies, decim=3)
+        power.plot("EEG 3", title=event_id)
+
 #########################
 
 
