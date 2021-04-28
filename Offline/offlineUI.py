@@ -47,8 +47,9 @@ class UI(UISkeleton.UISkeletonClass):
         #                    'border_color': (0, 0, 0), 'bar_color': (0, 128, 0)}
 
         # # used for pre-trial stimulus
-        self.blinks = self.params["BLINK_DURATION"]*3
-        self.blink_duration = 1/self.blinks
+        self.blinks_total_duration = self.params["BLINK_DURATION"]
+        self.blinks = 3
+        self.blink_duration = 1/(self.blinks * self.blinks_total_duration)
 
         # arrow image parameters
         self.current_image = None
@@ -176,24 +177,26 @@ class UI(UISkeleton.UISkeletonClass):
         pg.display.update()
         self.screen.blit(surf1, (533, 100))
         pg.display.flip()
-        # for i in range(self.blinks):
-        #     self.screen.fill((255, 255, 255), im_rect)
-        #     pg.display.flip()
-        #     time.sleep(self.blink_duration)
-        #     self.screen.blit(self.current_image, im_rect)
-        #     pg.display.flip()
-        #     time.sleep(self.blink_duration)
+        for i in range(self.blinks):
+            self.screen.fill((255, 255, 255), im_rect)
+            pg.display.flip()
+            # pg.time.delay(round(self.blink_duration)*1000)
+            self.screen.blit(self.current_image, im_rect)
+            pg.display.flip()
+            # pg.time.delay(round(self.blink_duration)*1000)
 
 
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
+
+        stim_time = time_between - self.blinks_total_duration*1000 - self.params["BREAK_DURATION"]*1000
         if action_name == 'LEFT':
-            self.run_ssvep(freqz=float(11), posxx=self.screen_width/2 - 400, posyy=self.screen_height/5,time_bet=time_between)
+            self.run_ssvep(freqz=float(11), posxx=self.screen_width/2 - 400, posyy=self.screen_height/5,time_bet=stim_time)
         elif action_name == 'RIGHT':
-            self.run_ssvep(freqz=float(17), posxx=self.screen_width/2 + 250, posyy=self.screen_height/5,time_bet=time_between)
+            self.run_ssvep(freqz=float(17), posxx=self.screen_width/2 + 250, posyy=self.screen_height/5,time_bet=stim_time)
         elif action_name == 'NONE':
             # self.run_ssvep(freqz=float(15), posxx=0.1, posyy=6, time_bet=time_between) # "displays" SSVEP stim off-screen, this is just for timing
-            self.dont_stop(breaks=10, dele=time_between)  # May be unnecessary when _not_ simulating
+            self.dont_stop(breaks=10, dele=stim_time)  # May be unnecessary when _not_ simulating
 
         #pg.time.delay(self.time_to_wait * 1000)
         pg.event.get()
