@@ -86,7 +86,7 @@ class Flick:
             duration = time_between
         if duration != 0:
             window = win  #  pygame.display.set_mode((1920, 1080), 0)
-            self.board_pos = (800/posx, 600/posy)
+            self.board_pos = (posx, posy)
             print(f"flicker duration {duration}")
             pygame.time.set_timer(timer_event, duration)
         else:

@@ -186,9 +186,9 @@ class UI(UISkeleton.UISkeletonClass):
         self.screen.fill((255, 255, 255), new_round_rect)
         pg.display.flip()
         if action_name == 'LEFT':
-            self.run_ssvep(freqz=float(11), posxx=4.3, posyy=6,time_bet=time_between)
+            self.run_ssvep(freqz=float(11), posxx=self.screen_width/2 - 400, posyy=self.screen_height/5,time_bet=time_between)
         elif action_name == 'RIGHT':
-            self.run_ssvep(freqz=float(17), posxx=1.5, posyy=6,time_bet=time_between)
+            self.run_ssvep(freqz=float(17), posxx=self.screen_width/2 + 250, posyy=self.screen_height/5,time_bet=time_between)
         elif action_name == 'NONE':
             # self.run_ssvep(freqz=float(15), posxx=0.1, posyy=6, time_bet=time_between) # "displays" SSVEP stim off-screen, this is just for timing
             self.dont_stop(breaks=10, dele=time_between)  # May be unnecessary when _not_ simulating
