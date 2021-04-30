@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import scipy
 import numpy as np
+import scipy.io
 from mne_features.feature_extraction import FeatureExtractor
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline, make_pipeline
@@ -81,7 +82,7 @@ def power_band(arr):
 
     len_eeg = len(arr[0])
 
-    freqs, times, spectrogram = signal.spectrogram(arr[:2], fs=125,nperseg = 10)
+    freqs, times, spectrogram = signal.spectrogram(arr.T, fs=128,nperseg = 10)
 
     time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
     power_band = []
@@ -103,8 +104,12 @@ def power_band(arr):
     return np.array(power_band)
 
 
-def train_mne_feature(data,labels,raw):
-    pipe = Pipeline([('fe', FeatureExtractor(sfreq = raw.info['sfreq'],
+def train_mne_feature(data,labels,raw = None,sfreq = None):
+    if not sfreq:
+
+        sfreq = raw.info['sfreq']
+
+    pipe = Pipeline([('fe', FeatureExtractor(sfreq = sfreq,
                                          selected_funcs = selected_features)),
                  ('scaler', StandardScaler()),
                  ('clf', SGDClassifier())])
@@ -179,16 +184,35 @@ selected_features = [('power_band', power_band)] # can be changed to any feature
 
 # selected_features = ["mean",'kurtosis','skewness',('power_band', compute_medfilt)] # can be cgahnged to any feature
 
-def main():
-    epochs,raw =  preprocess()
-    
-    
-    labels = epochs.events[:, -1]
+def read_from_mat():
+    '''
+    we create epochs object that will contain the left and the
+    right epochs from the mat file.
 
-    # get MEG and EEG data
-    epochs_data_train = epochs.get_data()
-            
-    pipe,scores = train_mne_feature(epochs_data_train,labels,raw)
+    for left we mark 0, for right we mark 1
+
+    :return:
+    '''
+    mat_left = scipy.io.loadmat(f'{DATA_PATH}left_data.mat')['leftData']
+    mat_right = scipy.io.loadmat(f'{DATA_PATH}right_data.mat')['rightData']
+    labels = [0]*len(mat_left) + [1]*len(mat_right)
+
+    epochs = np.concatenate((mat_left, mat_right), axis=0)
+
+    return epochs,labels
+
+def main():
+    # epochs,raw =  preprocess()
+    #
+    #
+    # labels = epochs.events[:, -1]
+    #
+    # # get MEG and EEG data
+    # epochs_data_train = epochs.get_data()
+
+    epochs_data_train, labels = read_from_mat()
+
+    pipe,scores = train_mne_feature(epochs_data_train,labels,sfreq = 128)
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
     

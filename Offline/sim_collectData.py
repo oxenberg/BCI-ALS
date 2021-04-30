@@ -1,6 +1,7 @@
 import numpy as np
 import mne
-
+import seaborn as sns
+import pandas as pd
 DATA_PATH = "../data/"
 EXP_NAME = DATA_PATH+"Or_5_raw.fif" #: give name to the expirement
 event_dict = {'LEFT': 1, 'RIGHT': 2, 'NONE': 3}
@@ -28,32 +29,42 @@ events = mne.find_events(rawData, stim_channel='STI')
 from scipy import signal
 import numpy as np
 from matplotlib import pyplot as plt
+import scipy.io
 
+# epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.8, tmax=1, preload=True)
+epochs = scipy.io.loadmat(f'{DATA_PATH}right_data.mat')['rightData']
 
-epochs = mne.Epochs(rawData, events, event_id=event_dict, tmin=-0.8, tmax=1, preload=True)
-epochs = epochs["RIGHT"]
-epochs = epochs.get_data()
+# epochs = epochs.get_data()
 times_to_cut = [0.7,1]
 frq_cutoff = [1,30] # take the frq band from here
+
+
+
 
 
 electrode = 2
 for electrode_id in np.arange(1):
     spectrograms = []
     for i in np.arange(epochs.shape[0]):
-        freqs, times, spectrogram = signal.spectrogram(epochs[i][electrode_id],fs = 125, nperseg = 10)
-
+        freqs, times, spectrogram = signal.spectrogram(epochs[i].T[electrode_id],fs = 128, nperseg = 32, noverlap = 0)
+        # powerSpectrum, freqs, times, imageAxis = plt.specgram(epochs[i].T[electrode_id], Fs=32)
         spectrograms.append(spectrogram)
 
-    t = np.linspace(-0.8, 1, len(times), endpoint=False)
+    t = np.linspace(0, 3.75, len(times), endpoint=False)
     chosen_times = np.where((t > times_to_cut[0]) & (t < times_to_cut[1]))[0]
     chosen_freq = np.where((freqs > frq_cutoff[0]) & (freqs < frq_cutoff[1]))[0]
     spectrograms = np.array(spectrograms)
 
-    plt.pcolormesh(t[chosen_times],freqs[chosen_freq], spectrograms.mean(axis = 0)[chosen_freq,chosen_times[:,np.newaxis]].T, shading='gouraud')
-    plt.ylabel('Frequency [Hz]')
-    plt.xlabel('Time [sec]')
+
+
+    # plt.pcolormesh(t,freqs, spectrograms.mean(axis = 0), shading='gouraud')
+    spectrograms = pd.DataFrame(data=spectrograms.mean(axis=0), index=freqs, columns=times)
+    f, ax = plt.subplots(figsize=(9, 6))
+    sns.heatmap(spectrograms, annot=False, ax=ax)
+    # ax.ylabel('Frequency [Hz]')
+    # plt.xlabel('Time [sec]')
     plt.title(f"electrod{electrode_id}")
+    plt.gca().invert_yaxis()
     plt.show()
 
 x  = spectrograms
