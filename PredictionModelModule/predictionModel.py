@@ -27,7 +27,7 @@ class PredictionModel:
         self.model = joblib.load(MODEL_PATH)
 
     def updateModel(self, data, label):
-        epochs,_ = self.preprocess(data, label)
+        epochs, _ = self.preprocess(data, label)
         labels = epochs.events[:, -1]
         update_data = epochs.get_data()
         # normalize and feature selection
@@ -36,7 +36,7 @@ class PredictionModel:
         # joblib.dump(self.model, MODEL_PATH)
 
     def predict(self, data):
-        _ , raw = self.preprocess(data)
+        _, raw = self.preprocess(data)
         prediction_data = np.array([raw.get_data()])
         label = self.model.predict(prediction_data)
         return label
