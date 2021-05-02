@@ -1,10 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from UI_objects import BlinkButton
 from random import random
-from time import sleep
 
 
-
+# to programmatically trigger click - without the mouse use the following command:
+# self.pushButton.Click()
 
 class Ui_FourOptionsWindow(object):
     def setupUi(self, MainWindow):
@@ -114,6 +114,5 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = MainWindow()
-    MainWindow.show()
 
     sys.exit(app.exec_())

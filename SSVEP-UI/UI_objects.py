@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QPushButton
 from PyQt5.QtCore import QTimer
+import random
+
 
 class BlinkButton(QPushButton):
     def __init__(self, parent, interval, label, onClick):
@@ -24,9 +26,6 @@ class BlinkButton(QPushButton):
             self.setStyleSheet('background-color: ' + self.colorB)
 
         self.visible = not self.visible
-
-    def onClick(self):
-        return random.random() >= 0.5
 
 
 if __name__ == "__main__":
