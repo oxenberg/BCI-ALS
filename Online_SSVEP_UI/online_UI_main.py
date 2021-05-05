@@ -239,6 +239,9 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             return ""
 
+    def getOutput(self):
+        return self.choices
+
     def clickFreq(self, freq):
         intervals = list(self.params["intervals"].keys())
         frequencies = self.calcFreq(intervals)
