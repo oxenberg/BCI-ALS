@@ -4,6 +4,7 @@
   "SAMPLE_RATE": 125,
   "DATA_PATH" :  "./data/",
   "ACTIONS" : {"1": "LEFT", "2": "RIGHT", "3": "NONE"},
+  "MAX_SSVEP_OPTIONS" : 4,
   "BLINK_DURATION" : 1,
   "BREAK_DURATION" : 2,
   "EXPERIMENT_DURATION" : 100,

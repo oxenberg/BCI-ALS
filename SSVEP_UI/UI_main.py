@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, QThread, pyqtSignal
 from PyQt5.QtWidgets import QFrame
-from UI_objects import BlinkButton
+from SSVEP_UI.UI_objects import BlinkButton
+from Offline.DataCollector import DataCollector
 from random import random
 
 
@@ -126,6 +127,7 @@ class Ui_ThreeOptionsWindow(object):
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
+        self.worker_init()
         self.uiFour = Ui_FourOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
         # self.layout_switcher()
@@ -145,19 +147,35 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.startThreeOptionsWindow()
 
-    def layout_switcher(self):
-        # j = read_params('params_offline.JSON')
-        # loc = j['button']['BR']
-        loc = [465, 50, 270, 210]
+    def layout_switcher(self,loc):
+
+        if not loc:
+            loc = [465, 50, 270, 210]
+
         self.new_trial(tuple(loc))
 
     def new_trial(self, frame_loc=None):
+        print("Hi")
         self.uiFour.setupUi(self, frame_loc)
         self.show()
+
+    def worker_init(self):
+        self.worker = WorkerThread()
+        self.worker.start()
+        self.worker.update_loc.connect(self.new_trial)
+
+class WorkerThread(QThread):
+    update_loc = pyqtSignal(list)
+    def __init__(self):
+        super().__init__()
+        self.data_collector = DataCollector(self)
+    def run(self):
+        self.data_collector.start_expirement()
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = MainWindow()
+
     sys.exit(app.exec_())
