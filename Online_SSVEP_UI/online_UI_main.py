@@ -1,9 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
-from online_UI_objects import BlinkButton
+from .online_UI_objects import BlinkButton
 from random import random
-from .utils import read_tree
+from Online_SSVEP_UI.utils import read_tree
 
 
 WHITE = 'rgb(255, 255, 255)'
