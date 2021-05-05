@@ -3,6 +3,7 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
 from online_UI_objects import BlinkButton
 from random import random
+from .utils import read_tree
 
 
 WHITE = 'rgb(255, 255, 255)'
@@ -18,6 +19,7 @@ INITIAL_BUTTON_STYLE = "QPushButton {\n"
 # to programmatically trigger click - without the mouse use the following command:
 # self.pushButton.Click()
 
+
 class Ui_FourOptionsWindow(object):
     def setupUi(self, MainWindow, frame_loc=None):
         MainWindow.setObjectName("SSVEP")
@@ -26,25 +28,25 @@ class Ui_FourOptionsWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.pushButton = BlinkButton(self.centralwidget, interval=1000, label='A', onClick=MainWindow.layout_switcher)
+        self.pushButton = BlinkButton(self.centralwidget, interval=1000, label=MainWindow.content[0], onClick=MainWindow.layout_switcher)
         self.pushButton.setStyleSheet(INITIAL_BUTTON_STYLE)
         self.pushButton.blink()
         self.pushButton.setGeometry(QRect(75, 350, 250, 190))
         self.pushButton.setObjectName("A")
 
-        self.pushButton_2 = BlinkButton(self.centralwidget, interval=500, label='B', onClick=MainWindow.layout_switcher)
+        self.pushButton_2 = BlinkButton(self.centralwidget, interval=500, label=MainWindow.content[1], onClick=MainWindow.layout_switcher)
         self.pushButton_2.setStyleSheet(INITIAL_BUTTON_STYLE)
         self.pushButton_2.blink()
         self.pushButton_2.setGeometry(QtCore.QRect(75, 60, 250, 190))
         self.pushButton_2.setObjectName("B")
 
-        self.pushButton_3 = BlinkButton(self.centralwidget, interval=100, label='C', onClick=MainWindow.layout_switcher)
+        self.pushButton_3 = BlinkButton(self.centralwidget, interval=100, label=MainWindow.content[2], onClick=MainWindow.layout_switcher)
         self.pushButton_3.setStyleSheet(INITIAL_BUTTON_STYLE)
         self.pushButton_3.blink()
         self.pushButton_3.setGeometry(QtCore.QRect(475, 60, 250, 190))
         self.pushButton_3.setObjectName("C")
 
-        self.pushButton_4 = BlinkButton(self.centralwidget, interval=200, label='D', onClick=MainWindow.layout_switcher)
+        self.pushButton_4 = BlinkButton(self.centralwidget, interval=200, label=MainWindow.content[3], onClick=MainWindow.layout_switcher)
         self.pushButton_4.setStyleSheet(INITIAL_BUTTON_STYLE)
         self.pushButton_4.blink()
         self.pushButton_4.setGeometry(QtCore.QRect(475, 350, 250, 190))
@@ -92,17 +94,17 @@ class Ui_ThreeOptionsWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
 
-        self.pushButton = BlinkButton(self.centralwidget, interval=500, label='A', onClick=MainWindow.layout_switcher)
+        self.pushButton = BlinkButton(self.centralwidget, interval=500, label=MainWindow.content[0], onClick=MainWindow.layout_switcher)
         self.pushButton.setObjectName(u"pushButton_2")
         self.pushButton.setGeometry(QtCore.QRect(120, 100, 131, 81))
         self.pushButton.setStyleSheet(u"background-color: rgb(170, 255, 255);")
 
-        self.pushButton_2 = BlinkButton(self.centralwidget, interval=100, label='B', onClick=MainWindow.layout_switcher)
+        self.pushButton_2 = BlinkButton(self.centralwidget, interval=100, label=MainWindow.content[1], onClick=MainWindow.layout_switcher)
         self.pushButton_2.setObjectName(u"pushButton_3")
         self.pushButton_2.setGeometry(QtCore.QRect(550, 100, 131, 81))
         self.pushButton_2.setStyleSheet(u"background-color: rgb(170, 255, 255);")
 
-        self.pushButton_3 = BlinkButton(self.centralwidget, interval=200, label='C', onClick=MainWindow.layout_switcher)
+        self.pushButton_3 = BlinkButton(self.centralwidget, interval=200, label=MainWindow.content[2], onClick=MainWindow.layout_switcher)
         self.pushButton_3.setObjectName(u"pushButton_4")
         self.pushButton_3.setGeometry(QtCore.QRect(340, 330, 131, 81))
         self.pushButton_3.setStyleSheet(u"background-color: rgb(170, 255, 255);")
@@ -130,6 +132,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiThree = Ui_ThreeOptionsWindow()
         # self.layout_switcher()
         self.new_trial()
+        self.decisionTree = read_tree()
+        self.content = [""]
+        self.choice_counter = 0
 
     def startThreeOptionsWindow(self):
         self.uiThree.setupUi(self)
@@ -146,6 +151,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.startThreeOptionsWindow()
 
     def layout_switcher(self):
+        if random() >= 0.5:
+            self.startFourOptionsWindow()
+        else:
+            self.startThreeOptionsWindow()
         # j = read_params('params_offline.JSON')
         # loc = j['button']['BR']
         loc = [465, 50, 270, 210]
