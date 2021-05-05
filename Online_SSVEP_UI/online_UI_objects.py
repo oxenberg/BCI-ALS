@@ -11,8 +11,9 @@ class BlinkButton(QPushButton):
         self.colorA = 'rgb(255, 193, 185)'
         self.colorB = 'rgb(255, 255, 255)'
         self.label = label
+        self.interval = interval
         timer = QTimer(parent=parent)
-        timer.setInterval(interval)
+        timer.setInterval(self.interval)
         timer.timeout.connect(self.blink)
         timer.start()
 
@@ -28,24 +29,24 @@ class BlinkButton(QPushButton):
     def blink(self):
         if self.visible:
             self.setStyleSheet("QPushButton {\n"
-"  border-color: rgb(66, 69, 183);\n"
-"  border-width: 5px;        \n"
-"  border-style: solid;\n"
-"  border-radius: 40px;\n"
-"  padding:30px;\n"
-"  background-color: rgb(255, 193, 185);\n"
-"}\n"
-"")
+                               "  border-color: rgb(66, 69, 183);\n"
+                               "  border-width: 5px;        \n"
+                               "  border-style: solid;\n"
+                               "  border-radius: 40px;\n"
+                               "  padding:30px;\n"
+                               "  background-color: rgb(255, 193, 185);\n"
+                               "}\n"
+                               "")
         else:
             self.setStyleSheet("QPushButton {\n"
-"  border-color: rgb(66, 69, 183);\n"
-"  border-width: 5px;        \n"
-"  border-style: solid;\n"
-"  border-radius: 40px;\n"
-"  padding:30px;\n"
-"  background-color: rgb(255, 255, 255);\n"
-"}\n"
-"")
+                               "  border-color: rgb(66, 69, 183);\n"
+                               "  border-width: 5px;        \n"
+                               "  border-style: solid;\n"
+                               "  border-radius: 40px;\n"
+                               "  padding:30px;\n"
+                               "  background-color: rgb(255, 255, 255);\n"
+                               "}\n"
+                               "")
         self.visible = not self.visible
 
 
