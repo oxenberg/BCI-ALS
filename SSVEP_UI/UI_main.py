@@ -155,7 +155,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.new_trial(tuple(loc))
 
     def new_trial(self, frame_loc=None):
-        print("Hi")
         self.uiFour.setupUi(self, frame_loc)
         self.show()
 
