@@ -1,12 +1,12 @@
-import matplotlib.pyplot as plt
-from mne.stats import bootstrap_confidence_interval
-from mne.baseline import rescale
+# import matplotlib.pyplot as plt
+# from mne.stats import bootstrap_confidence_interval
+# from mne.baseline import rescale
 
 from pyOpenBCI import OpenBCICyton
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import numpy as np
-import mne
+# import mne
 import random
 import time
 import sys
