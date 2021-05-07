@@ -1,66 +1,62 @@
 {
-  "A" : {"A1" : {
-                "A1a": "A1a - done",
-                "A1b": "A1b - done",
-                "A1c": "A1c - done",
-                "A1d": "A1d - done"
+  "Malignant" : {"Gleason Pattern" : {
+                "Not applicable": "Gleason Pattern - Not applicable",
+                "Cannot be determined": "Gleason Pattern - Cannot be determined",
+                "Primary (Predominant) Pattern": {
+                  "Grade 1" : "Primary Grade 1",
+                  "Grade 2" : "Primary Grade 2",
+                  "Grade 3" : "Primary Grade 3",
+                  "Grade 4" : "Primary Grade 4",
+                  "Grade 5" : "Primary Grade 5"
+                },
+                "Secondary (Worst Remaining) Pattern": {
+                  "Grade 1" : "Secondary Grade 1",
+                  "Grade 2" : "Secondary Grade 2",
+                  "Grade 3" : "Secondary Grade 3",
+                  "Grade 4" : "Secondary Grade 4",
+                  "Grade 5" : "Secondary Grade 5"
+                }
               },
-        "A2" : {
-                "A2a": "A2a - done",
-                "A2b": "A2b - done",
-                "A2c": "A2c - done"
+        "Tumor Size (mm)" : {
+                "0": "First 0",
+                "1": "First 1",
+                "2": "First 2",
+                "3": "First 3",
+                "4": "First 4",
+                "5": "First 5",
+                "6": "First 6",
+                "7": "First 7",
+                "8": "First 8",
+                "9": "First 9"
               },
-        "A3" : {
-                "A3a": "A3a - done",
-                "A3b": "A3b - done",
-                "A3c": "A3c - done",
-                "A3d": "A3d - done"
-              },
-        "A4" : {
-                "A4a": "A4a - done",
-                "A4b": "A4b - done",
-                "A4c": "A4c - done"
+        "Tumor Type" : {
+                "Acinar adenocarcinoma": "Acinar adenocarcinoma",
+                "Ductal adenocarcinoma": "Ductal adenocarcinoma",
+                "Transitional cell (or urothelial)": "Transitional cell (or urothelial)",
+                "Squamous cell": "Squamous cell",
+                "Small cell": "Small cell",
+                "Neuroendocrine": "Neuroendocrine",
+                "Sarcoma": "Sarcoma"
+        },
+        "Time of Classification" : {
+                "cTNM/TNM": "cTNM/TNM",
+                "pTNM": "pTNM",
+                "ycTNM": "ycTNM",
+                "ypTNM": "ypTNM",
+                "rTNM": "rTNM",
+                "aTNM": "aTNM"
               }
       },
-  "B" : {"B1" : {
-                "B1a": "B1a - done",
-                "B1b": "B1b - done",
-                "B1c": "B1c - done",
-                "B1d": "B1d - done"
-              },
-        "B2" : {
-                "B2a": "B2a - done",
-                "B2b": "B2b - done",
-                "B2c": "B2c - done"
-              },
-        "B3" : {
-                "B3a": "B3a - done",
-                "B3b": "B3b - done",
-                "B3c": "B3c - done",
-                "B3d": "B3d - done"
-              },
-        "B4" : {
-                "B4a": "B4a - done",
-                "B4b": "B4b - done",
-                "B4c": "B4c - done"
-              }
+  "Benign" : {
+                "BPH": "Benign prostatic hyperplasia",
+                "Atrophy": "Atrophy",
+                "Adenosis": "Atypical adenomatous hyperplasia"
       },
-  "C" : {"C1" : {
-                "C1a": "C1a - done",
-                "C1b": "C1b - done",
-                "C1c": "C1c - done",
-                "C1d": "C1d - done"
-              },
-        "C2" : {
-                "C2a": "C2a - done",
-                "C2b": "C2b - done",
-                "C2c": "C2c - done"
-              },
-        "C3" : {
-                "C3a": "C3a - done",
-                "C3b": "C3b - done",
-                "C3c": "C3c - done",
-                "C3d": "C3d - done"
-              }
+  "Suspicious" : {
+                "ASAP": "Atypical small acinar proliferation",
+                "Glandular atypia": "Glandular atypia",
+                "Atypical glandular proliferation": "Atypical glandular proliferation",
+                "High grade PIN": "High grade prostatic intraepithelial neoplasia"
+
       }
 }
