@@ -1,77 +1,76 @@
 {
-  "ID" : {
-    "0": "0",
-    "1": "1",
-    "2": "2",
-    "3": "3",
-    "4": "4",
-    "5": "5",
-    "6": "6",
-    "7": "7",
-    "8": "8",
-    "9": "9"
-  },
-
-  "Malignant" : {"Gleason Pattern" : {
-                "Not applicable": "Gleason Pattern - Not applicable",
-                "Cannot be determined": "Gleason Pattern - Cannot be determined",
-                "Applicable" : {
-                  "Primary (Predominant) Pattern": {
-                  "Grade 1" : "Primary Grade 1",
-                  "Grade 2" : "Primary Grade 2",
-                  "Grade 3" : "Primary Grade 3",
-                  "Grade 4" : "Primary Grade 4",
-                  "Grade 5" : "Primary Grade 5"
-                },
-                "Secondary (Worst Remaining) Pattern": {
-                  "Grade 1" : "Secondary Grade 1",
-                  "Grade 2" : "Secondary Grade 2",
-                  "Grade 3" : "Secondary Grade 3",
-                  "Grade 4" : "Secondary Grade 4",
-                  "Grade 5" : "Secondary Grade 5"
-                  }
-                }
-              },
-        "Tumor Size (mm)" : {
-                "0": "First 0",
-                "1": "First 1",
-                "2": "First 2",
-                "3": "First 3",
-                "4": "First 4",
-                "5": "First 5",
-                "6": "First 6",
-                "7": "First 7",
-                "8": "First 8",
-                "9": "First 9"
-              },
-        "Tumor Type" : {
-                "Acinar adenocarcinoma": "Acinar adenocarcinoma",
-                "Ductal adenocarcinoma": "Ductal adenocarcinoma",
-                "Transitional cell (or urothelial)": "Transitional cell (or urothelial)",
-                "Squamous cell": "Squamous cell",
-                "Small cell": "Small cell",
-                "Neuroendocrine": "Neuroendocrine",
-                "Sarcoma": "Sarcoma"
-        },
-        "Time of Classification" : {
-                "cTNM/TNM": "cTNM/TNM",
-                "pTNM": "pTNM",
-                "ycTNM": "ycTNM",
-                "ypTNM": "ypTNM",
-                "rTNM": "rTNM",
-                "aTNM": "aTNM"
-              }
-      },
-  "Benign" : {
-                "BPH": "Benign prostatic hyperplasia",
-                "Atrophy": "Atrophy",
-                "Adenosis": "Atypical adenomatous hyperplasia"
-      },
-  "Suspicious" : {
-                "ASAP": "Atypical small acinar proliferation",
-                "Glandular atypia": "Glandular atypia",
-                "Atypical glandular proliferation": "Atypical glandular proliferation",
-                "High grade PIN": "High grade prostatic intraepithelial neoplasia"
-
-      }
+	"ID": {
+		"0": "0",
+		"1": "1",
+		"2": "2",
+		"3": "3",
+		"4": "4",
+		"5": "5",
+		"6": "6",
+		"7": "7",
+		"8": "8",
+		"9": "9"
+	},
+	"Malignant": {
+		"Gleason Pattern": {
+			"Not applicable": "Gleason Pattern - Not applicable",
+			"Cannot be determined": "Gleason Pattern - Cannot be determined",
+			"Applicable": {
+				"Primary (Predominant) Pattern": {
+					"Grade 1": "Primary Grade 1",
+					"Grade 2": "Primary Grade 2",
+					"Grade 3": "Primary Grade 3",
+					"Grade 4": "Primary Grade 4",
+					"Grade 5": "Primary Grade 5"
+				},
+				"Secondary (Worst Remaining) Pattern": {
+					"Grade 1": "Secondary Grade 1",
+					"Grade 2": "Secondary Grade 2",
+					"Grade 3": "Secondary Grade 3",
+					"Grade 4": "Secondary Grade 4",
+					"Grade 5": "Secondary Grade 5"
+				}
+			}
+		},
+		"Tumor Size (mm)": {
+			"0": "First 0",
+			"1": "First 1",
+			"2": "First 2",
+			"3": "First 3",
+			"4": "First 4",
+			"5": "First 5",
+			"6": "First 6",
+			"7": "First 7",
+			"8": "First 8",
+			"9": "First 9"
+		},
+		"Tumor Type": {
+			"Acinar adenocarcinoma": "Acinar adenocarcinoma",
+			"Ductal adenocarcinoma": "Ductal adenocarcinoma",
+			"Transitional cell (or urothelial)": "Transitional cell (or urothelial)",
+			"Squamous cell": "Squamous cell",
+			"Small cell": "Small cell",
+			"Neuroendocrine": "Neuroendocrine",
+			"Sarcoma": "Sarcoma"
+		},
+		"Time of Classification": {
+			"cTNM/TNM": "cTNM/TNM",
+			"pTNM": "pTNM",
+			"ycTNM": "ycTNM",
+			"ypTNM": "ypTNM",
+			"rTNM": "rTNM",
+			"aTNM": "aTNM"
+		}
+	},
+	"Benign": {
+		"BPH": "Benign prostatic hyperplasia",
+		"Atrophy": "Atrophy",
+		"Adenosis": "Atypical adenomatous hyperplasia"
+	},
+	"Suspicious": {
+		"ASAP": "Atypical small acinar proliferation",
+		"Glandular atypia": "Glandular atypia",
+		"Atypical glandular proliferation": "Atypical glandular proliferation",
+		"High grade PIN": "High grade prostatic intraepithelial neoplasia"
+	}
 }
