@@ -70,7 +70,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.choice_counter = 0
             self.choices.append(choice)
             self.currentChoice = ''
-            self.content = self.getNextLayer()
+            self.content = self.getNextLayer(choice)
             self.frame_type = self.decideFrameType()
             if int(self.frame_type) == 2:
                 self.startTwoOptionsWindow()
@@ -119,7 +119,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def getContent(self):
         return list(self.content)
 
-    def getNextLayer(self):
+    def getNextLayer(self, choice):
+        if choice == "Back":
+            self.choices.pop()
         nextOptions = self.decisionTree
         for l in self.choices:
             if isinstance(nextOptions, dict):

@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QApplication, QPushButton
+from PyQt5.QtGui import *
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
@@ -71,11 +72,12 @@ class Ui_TwoOptionsWindow(object):
 
         self.buttons = []
         for i in range(2):
-            pb = BlinkButton(self.centralwidget, index=i, frequency=params['frequencies'][i], label=MainWindow.getContent()[i],
-                                      onClick=MainWindow.layout_switcher)
+            pb = BlinkButton(self.centralwidget, index=i, frequency=params['frequencies'][i],
+                             label=MainWindow.getContent()[i], onClick=MainWindow.layout_switcher)
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -128,6 +130,7 @@ class Ui_ThreeOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -179,6 +182,7 @@ class Ui_FourOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -228,6 +232,7 @@ class Ui_FiveOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -280,6 +285,7 @@ class Ui_SixOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -332,6 +338,7 @@ class Ui_SevenOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -384,6 +391,7 @@ class Ui_EightOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
@@ -436,6 +444,7 @@ class Ui_NineOptionsWindow(object):
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
             pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setFont(QFont('Times', 20))
             pb.setObjectName(str(i))
             self.buttons.append(pb)
 
