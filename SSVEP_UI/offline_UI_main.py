@@ -1,10 +1,12 @@
 from PyQt5 import QtWidgets
 from SSVEP_UI.UI_objects import Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_NineOptionsWindow, OfflineWorkerThread
+from inputModule import read_params
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
+        self.params = read_params("params_offline.JSON")
         self.worker_init()
         self.uiNine = Ui_NineOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
@@ -30,7 +32,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.new_trial(tuple(loc))
 
     def new_trial(self, frame_loc=None):
-        self.uiNine.setupUi(self, self.params['9_screen_params'], frame_loc)
+        self.uiNine.setupUi(self, self.params['9_screen_params'], frame_loc , show_content = False)
         self.show()
 
     def worker_init(self):

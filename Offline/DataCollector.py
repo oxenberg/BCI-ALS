@@ -34,7 +34,7 @@ class DataCollector:
         self.start_time = time.time()
         self.counter = 0
         self.UI = UI
-        self.button_options = list(self.params_offline["button"].values())
+        self.button_options = self.params_offline["9_screen_params"]["positions"]
 
         self.all_eeg_data = []
 

@@ -429,17 +429,22 @@ class Ui_EightOptionsWindow(object):
 
 
 class Ui_NineOptionsWindow(object):
-    def setupUi(self, MainWindow, params, frame_loc=None):
+    def setupUi(self, MainWindow, params, frame_loc=None,show_content = True):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 600)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.buttons_size = 9
+        if show_content:
+            self.content = MainWindow.getContent()
+        else:
+            self.content = [""] * self.buttons_size
 
         self.buttons = []
-        for i in range(9):
-            pb = BlinkButton(self.centralwidget, index=i, frequency=params['frequencies'][i], label=MainWindow.getContent()[i],
+        for i in range(self.buttons_size):
+            pb = BlinkButton(self.centralwidget, index=i, frequency=params['frequencies'][i], label=self.content[i],
                                       onClick=MainWindow.layout_switcher)
             pb.setStyleSheet(INITIAL_BUTTON_STYLE)
             pb.blink()
@@ -476,9 +481,9 @@ class Ui_NineOptionsWindow(object):
     # retranslateUi
 
     def raise_all_buttons(self):
-        self.frame.raise_()
         for pb in self.buttons:
             pb.raise_()
+        self.frame.raise_()
 
 
 class OfflineWorkerThread(QThread):
