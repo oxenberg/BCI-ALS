@@ -1,15 +1,16 @@
 from PyQt5 import QtWidgets
-from UI_objects import Ui_ThreeOptionsWindow, Ui_FourOptionsWindow
+from SSVEP_UI.UI_objects import Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_NineOptionsWindow
 from SSVEP_UI.utils import read_json
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.decisionTree = read_json()
+        self.decisionTree = read_json('online_UI_example.JSON')
         self.params = read_json('params_offline.JSON')
         self.uiFour = Ui_FourOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
+        self.uiNine = Ui_NineOptionsWindow()
         self.content = self.decisionTree.keys()
         self.frame_type = self.decideFrameType()
         self.new_trial()
@@ -26,13 +27,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiFour.setupUi(self, self.params['4_screen_params'])
         self.show()
 
+    def startNineOptionsWindow(self):
+        self.uiNine.setupUi(self, self.params['9_screen_params'])
+        self.show()
+
     def layout_switcher(self):
         self.choice_counter += 1
         sender = self.sender()
         button_idx = sender.index
         choice_content = sender.label
         position = self.params[self.frame_type + '_screen_params']['positions'][button_idx]
-
         self.decideNextWindow(choice_content, position)
 
     def decideNextWindow(self, choice, position):
@@ -46,6 +50,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.startFourOptionsWindow()
             elif int(self.frame_type) == 3:
                 self.startThreeOptionsWindow()
+            elif int(self.frame_type) == 9:
+                self.startNineOptionsWindow()
             else:
                 self.close()
         elif self.currentChoice != choice:
@@ -58,8 +64,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def new_trial(self, frame_loc=None):
         if len(self.getContent()) == 3:
             self.uiThree.setupUi(self, params=self.params['3_screen_params'], frame_loc=frame_loc)
-        else:
+        elif len(self.getContent()) == 4:
             self.uiFour.setupUi(self, params=self.params['4_screen_params'], frame_loc=frame_loc)
+        elif len(self.getContent()) == 9:
+            self.uiNine.setupUi(self, params=self.params['9_screen_params'], frame_loc=frame_loc)
         self.show()
 
     def getContent(self):
@@ -86,6 +94,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.uiThree.buttons[freqs.index(freq)].click()
         elif self.frame_type == 4:
             self.uiFour.buttons[freqs.index(freq)].click()
+        elif self.frame_type == 9:
+            self.uiNine.buttons[freqs.index(freq)].click()
 
 
 if __name__ == "__main__":

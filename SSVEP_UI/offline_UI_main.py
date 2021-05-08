@@ -1,11 +1,12 @@
 from PyQt5 import QtWidgets
-from UI_objects import Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, OfflineWorkerThread
+from SSVEP_UI.UI_objects import Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_NineOptionsWindow, OfflineWorkerThread
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.worker_init()
+        self.uiNine = Ui_NineOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
         self.new_trial()
@@ -18,6 +19,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiFour.setupUi(self, self.params['4_screen_params'])
         self.show()
 
+    def startNineOptionsWindow(self):
+        self.uiNine.setupUi(self, self.params['9_screen_params'])
+        self.show()
+
     def layout_switcher(self, loc):
         if not loc:
             loc = [465, 50, 270, 210]
@@ -25,7 +30,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.new_trial(tuple(loc))
 
     def new_trial(self, frame_loc=None):
-        self.uiFour.setupUi(self, self.params['4_screen_params'], frame_loc)
+        self.uiNine.setupUi(self, self.params['9_screen_params'], frame_loc)
         self.show()
 
     def worker_init(self):

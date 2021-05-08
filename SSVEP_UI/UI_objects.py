@@ -160,6 +160,58 @@ class Ui_FourOptionsWindow(object):
             pb.raise_()
 
 
+class Ui_NineOptionsWindow(object):
+    def setupUi(self, MainWindow, params, frame_loc=None):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName(u"centralwidget")
+
+        self.buttons = []
+        for i in range(9):
+            pb = BlinkButton(self.centralwidget, index=i, frequency=params['frequencies'][i], label=MainWindow.getContent()[i],
+                                      onClick=MainWindow.layout_switcher)
+            pb.setStyleSheet(INITIAL_BUTTON_STYLE)
+            pb.blink()
+            pb.setGeometry(QtCore.QRect(*tuple(params["positions"][i])))
+            pb.setObjectName(str(i))
+            self.buttons.append(pb)
+
+        if frame_loc:
+            self.frame = QFrame(self.centralwidget)
+            self.frame.setObjectName(u"frame")
+            self.frame.setGeometry(QRect(*frame_loc))
+            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
+                                     "border-color: rgb(207, 255, 192);\n"
+                                     "border-width: 6px;        \n"
+                                     "border-style: solid;\n"
+                                     "border-radius: 40px;\n"
+                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setFrameShape(QFrame.StyledPanel)
+            self.raise_all_buttons()
+
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+    # setupUi
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "SSVEP"))
+        for pb in self.buttons:
+            pb.setText(_translate("MainWindow", pb.label))
+    # retranslateUi
+
+    def raise_all_buttons(self):
+        self.frame.raise_()
+        for pb in self.buttons:
+            pb.raise_()
+
+
 class OfflineWorkerThread(QThread):
     update_loc = pyqtSignal(list)
 
