@@ -1,1 +1,1 @@
-from Predict_SSVEP import Prediction_SSVEP
+from .pipeline import ModelPipeline

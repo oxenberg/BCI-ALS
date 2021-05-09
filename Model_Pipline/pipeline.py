@@ -12,18 +12,16 @@ import joblib
 from inputModule.utils import read_params
 import numpy as np
 
-MODEL_PATH = "ssvepModel.pkl"
+MODEL_PATH = "model_pip.pkl"
 
 
 class ModelPipeline:
     def __init__(self):
         self.params = read_params()
-
-        if not path.isfile(MODEL_PATH):
-            print("Couldn't find existing model")
-            # throw exception
-
-        self.model = joblib.load(MODEL_PATH)
+        try:
+            self.model = joblib.load(MODEL_PATH)
+        except ValueError:
+            print("Oops! Couldn't find existing model")
 
     def predict(self, data):
         _, raw = self.preprocess(data)
