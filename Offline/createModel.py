@@ -26,12 +26,12 @@ from scipy import signal
 from sklearn.svm import SVC, LinearSVC
 
 DATA_PATH = "data/"
-EXP_NAME = DATA_PATH+"Or_5_raw.fif" ## file name to run the anaylsis on
+EXP_NAME = DATA_PATH+"or_SSVEP_1_raw.fif" ## file name to run the anaylsis on
 FS = 125 # sampling rate
 T = 1/FS # sample time
-tmin, tmax = -0.8, 1  # TODO change to: 1.2, 6
+tmin, tmax = 1.2, 5
 
-cutoff = [1,30] # take the frq band from here
+cutoff = [4,40] # take the frq band from here
 
 features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'hjorth_complexity', 'hjorth_complexity_spect', 'hjorth_mobility',
@@ -58,7 +58,7 @@ def preprocess():
                        exclude='bads')
     
     
-    event_id = {'Left': 1, 'right': 2,'none': 3}
+    event_id = {"1": 1, "2": 2, "3": 3,"4": 4, "5": 5, "6": 6,"7": 7, "8": 8, "9": 9}
     
     epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                     baseline=None, preload=True)
@@ -78,11 +78,11 @@ def power_band(arr):
     -------
     output : (n_channels * n_times,)
     """
-    times_index = [[-0.1,0.22],[0.7,1]]
+    times_index = [[1,2]]
 
     len_eeg = len(arr[0])
 
-    freqs, times, spectrogram = signal.spectrogram(arr.T, fs=128,nperseg = 10)
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
 
     time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
     power_band = []
@@ -91,7 +91,7 @@ def power_band(arr):
 
             chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
             chosen_freq = np.where((freqs > cutoff[index]) & (freqs < cutoff[index + 1]))[0]
-            spectrogram_area = spectrogram[:,chosen_freq,chosen_times[:,np.newaxis]].T
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
 
             # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
             # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
@@ -202,21 +202,22 @@ def read_from_mat():
     return epochs,labels
 
 def main():
-    # epochs,raw =  preprocess()
+    epochs,raw =  preprocess()
     #
     #
-    # labels = epochs.events[:, -1]
+    labels = epochs.events[:, -1]
     #
     # # get MEG and EEG data
-    # epochs_data_train = epochs.get_data()
+    epochs_data_train = epochs.get_data()
 
-    epochs_data_train, labels = read_from_mat()
+    # epochs_data_train, labels = read_from_mat()
 
     pipe,scores = train_mne_feature(epochs_data_train,labels,sfreq = 128)
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
-    
-    
+
+    joblib.dump(pipe, "../")
+
     return pipe,transformed_data,scores
 
 if __name__ == '__main__':

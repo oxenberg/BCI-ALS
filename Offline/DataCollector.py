@@ -6,10 +6,9 @@ from pyOpenBCI import OpenBCICyton
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import numpy as np
-# import mne
+import mne
 import random
 import time
-import sys
 
 # our modules
 from inputModule import read_params
@@ -35,8 +34,10 @@ class DataCollector:
         self.counter = 0
         self.UI = UI
         self.button_options = self.params_offline["9_screen_params"]["positions"]
+        self.ACTIONS = { int(k): v for k,v in self.params_offline["ACTIONS"].items()}
 
         self.all_eeg_data = []
+        self.stim = []
 
     def run_expirement(self, sample):
         """
@@ -46,11 +47,16 @@ class DataCollector:
         data = np.array(sample.channels_data) * self.params_offline["uVolts_per_count"]
         all_time = time.time() - self.start_time  # total time form exp beginning
         self.counter += 1  # count how many samples take until now
+
         if self.counter % self.time_between_events_rate == 0:
             button_index = random.randint(1, self.params_offline["MAX_SSVEP_OPTIONS"])
             choosen_button_loc = self.button_options[button_index-1]
             # self.UI.layout_switcher(choosen_button_loc)
+
+            self.stim.append(button_index)
             self.UI.update_loc.emit(choosen_button_loc)
+        else:
+            self.stim.append(0)
 
         self.all_eeg_data.append(data)
 
@@ -59,16 +65,47 @@ class DataCollector:
 
     def start_expirement(self):
         self.board.start_stream(self.run_expirement)
+        self.save_data()
 
     def end_expirment(self):
         self.board.disconnect()
-        sys.exit(self.app.exec_())
 
-    # def init_UI(self):
-    #     app = QtWidgets.QApplication(sys.argv)
-    #     main_window = MainWindow()
-    #     app.exec_()
-    #     return main_window, app
+    def create_raw_data(self,results, stim):
+        ch_type = 'eeg'
+        info = mne.create_info(self.params_offline["ch_names"], self.params_offline["SAMPLE_RATE"], ch_type)
+        rawData = mne.io.RawArray(results, info)
+        #: add events data to raw
+        stim_info = mne.create_info(['STI'], rawData.info['sfreq'], ['stim'])
+        stim = np.expand_dims(stim, axis=0)
+        stim_raw = mne.io.RawArray(stim, stim_info)
+        rawData.add_channels([stim_raw], force_update_info=True)
+
+        return rawData
+
+    def save_data(self):
+        array_data = np.array(self.all_eeg_data)
+        array_data = array_data.transpose()
+        array_data_v = array_data * 10 ** (-6)  #: to volt
+
+        #: transform to raw (mne) format
+        rawData = self.create_raw_data(array_data_v, self.stim)
+
+        #: filter electrecy 50 hz freq
+        rawData.info['bads'].extend( ["Fp1", "Fp2", "C3", "C4", "P7", "P8", "F7", "F8", "F3", "F4", "T7", "T8"])  # add a list of channels
+
+        rawData = rawData.filter(2, 45., fir_design='firwin')
+
+        #: mainualy filtering
+        events = mne.find_events(rawData, stim_channel='STI')
+
+        annot_from_events = mne.annotations_from_events(
+            events=events, event_desc=self.ACTIONS, sfreq=rawData.info['sfreq'])
+        rawData.set_annotations(annot_from_events)
+
+        rawData.plot()
+
+        #: save data after cleaning
+        rawData.save(f"../data/{self.params_offline['EXP_NAME']}_raw.fif", overwrite=True)
 
     def set_time_from_json(self):
         TIME_BETWEEN_EVENTS = self.params_offline["TIME_BETWEEN_EVENTS"]  # in seconds
