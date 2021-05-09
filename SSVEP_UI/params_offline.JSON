@@ -8,6 +8,7 @@
   "BLINK_DURATION": 1,
   "BREAK_DURATION": 2,
   "EXPERIMENT_DURATION": 100,
+  "PREDICTION_WINDOW_SIZE": 700,
   "port": "COM3",
   "RUN_EXP": 1,
   "EXP_FILE_NAME": "Yahel_nope_raw.fif",

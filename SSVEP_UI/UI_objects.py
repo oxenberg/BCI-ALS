@@ -5,6 +5,7 @@ from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
 from Offline.DataCollector import DataCollector
+from Model_Pipline.Data_Collector import DataCollectorOnline
 
 INITIAL_BUTTON_STYLE = "QPushButton {\n"
 "  border-color: rgb(66, 69, 183);\n"
@@ -495,6 +496,17 @@ class OfflineWorkerThread(QThread):
 
     def run(self):
         self.data_collector.start_expirement()
+
+
+class OnlineWorkerThread(QThread):
+    update_loc = pyqtSignal(float)
+
+    def __init__(self):
+        super().__init__()
+        self.data_collector = DataCollectorOnline(self)
+
+    def run(self):
+        self.data_collector.start_experiment()
 
 
 if __name__ == "__main__":
