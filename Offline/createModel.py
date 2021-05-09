@@ -22,10 +22,11 @@ from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier,
 from mne import Epochs, pick_types, events_from_annotations
 import mne
 from scipy import signal
+import joblib
 
 from sklearn.svm import SVC, LinearSVC
 
-DATA_PATH = "data/"
+DATA_PATH = "../data/"
 EXP_NAME = DATA_PATH+"or_SSVEP_1_raw.fif" ## file name to run the anaylsis on
 FS = 125 # sampling rate
 T = 1/FS # sample time
@@ -216,10 +217,9 @@ def main():
     
     transformed_data = pipe["fe"].fit_transform(epochs_data_train) #: transformed_data is matrix dim by the featuhers X events
 
-    joblib.dump(pipe, "../")
 
     return pipe,transformed_data,scores
 
 if __name__ == '__main__':
     pipe,transformed_data,scores = main()
-    
+    joblib.dump(pipe, "../Model_Pipline/model_pip.pkl")
