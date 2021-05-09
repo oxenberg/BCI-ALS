@@ -41,7 +41,8 @@ class SignalReader:
             labels_list.extend([int(key)] * ceil_num)
         np.random.shuffle(labels_list)
         return labels_list
-    def start_experiment(self, simulation = False):
+
+    def start_experiment(self, simulation=False):
         '''
         this function activate all the online experiment session and games.
         '''
@@ -66,7 +67,7 @@ class SignalReader:
         # in the first integration the round_not_end always be 0 and the else will activate
         if not self.UItest.end_game():
             # need to check if window gap time over and if the window not empty
-            if predict_time and len(self.window_data) == self.params["PREDICTION_WINDOW_SIZE"] :
+            if predict_time and len(self.window_data) == self.params["PREDICTION_WINDOW_SIZE"]:
                 prediction = self.prediction_model.predict(list(self.window_data))[0]
                 self.UItest.step(prediction)
                 stim = self.int_action

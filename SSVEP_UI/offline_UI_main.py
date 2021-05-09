@@ -32,7 +32,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.new_trial(tuple(loc))
 
     def new_trial(self, frame_loc=None):
-        self.uiNine.setupUi(self, self.params['9_screen_params'], frame_loc , show_content = False)
+        self.uiNine.setupUi(self, self.params['9_screen_params'], frame_loc, show_content=False)
         self.show()
 
     def worker_init(self):
