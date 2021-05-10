@@ -1,9 +1,4 @@
-# import matplotlib.pyplot as plt
-# from mne.stats import bootstrap_confidence_interval
-# from mne.baseline import rescale
-
 from pyOpenBCI import OpenBCICyton
-from PyQt5 import QtCore, QtGui, QtWidgets
 
 import numpy as np
 import mne
@@ -14,7 +9,7 @@ import time
 from inputModule import read_params
 
 
-class DataCollector:
+class OfflineDataCollector:
     '''
     get all the parameters from the params_offline.JSON
 
@@ -23,7 +18,7 @@ class DataCollector:
     activate the offline UI
     '''
 
-    def __init__(self,UI):
+    def __init__(self, UI):
         self.params_offline = read_params("params_offline.JSON")
         # important params for calculate time
 
@@ -112,7 +107,3 @@ class DataCollector:
         SAMPLE_RATE = self.params_offline["SAMPLE_RATE"]
         return SAMPLE_RATE * TIME_BETWEEN_EVENTS
 
-
-if __name__ == "__main__":
-    data_collector = DataCollector()
-    data_collector.start_expirement()

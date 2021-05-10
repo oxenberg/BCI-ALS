@@ -1,13 +1,5 @@
-import pandas as pd
-from mne_features.feature_extraction import FeatureExtractor
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import SGDClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import (GridSearchCV, StratifiedKFold)
 from mne import Epochs, pick_types
 import mne
-from os import path
 import joblib
 from inputModule.utils import read_params
 import numpy as np

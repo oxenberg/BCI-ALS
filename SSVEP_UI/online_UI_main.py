@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets
-from SSVEP_UI.UI_objects import Ui_TwoOptionsWindow, Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_FiveOptionsWindow,\
+from SSVEP_UI.UI_objects import (
+    Ui_TwoOptionsWindow, Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_FiveOptionsWindow,
     Ui_SixOptionsWindow, Ui_SevenOptionsWindow, Ui_EightOptionsWindow, Ui_NineOptionsWindow, OnlineWorkerThread
+)
 from SSVEP_UI.utils import read_json
 
 
@@ -8,7 +10,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.decisionTree = read_json('online_UI_example.JSON')
-        self.params = read_json('params_offline.JSON')
+        self.params = read_json('../params_offline.JSON')
         self.uiTwo = Ui_TwoOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
@@ -19,6 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiNine = Ui_NineOptionsWindow()
         self.content = self.decisionTree.keys()
         self.frame_type = self.decideFrameType()
+        self.worker = OnlineWorkerThread()
         self.worker_init()
         self.new_trial()
         self.choices = []
@@ -90,7 +93,9 @@ class MainWindow(QtWidgets.QMainWindow):
             elif int(self.frame_type) == 9:
                 self.startNineOptionsWindow()
             else:
+                self.worker.terminate = True
                 self.close()
+
         elif self.currentChoice != choice:
             enlarge = [-10, -10, 20, 20]
             pos = [p + d for p, d in zip(position, enlarge)]
@@ -137,7 +142,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def getOutput(self):
         return self.choices
 
-    def clickFreq(self, freq):  # TODO: how do we get here from the data collector
+    def clickFreq(self, freq):
         freqs = list(self.params[self.frame_type + '_screen_params']["frequencies"].values())
         if self.frame_type == 2:
             self.uiTwo.buttons[freqs.index(freq)].click()
@@ -157,9 +162,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.uiNine.buttons[freqs.index(freq)].click()
 
     def worker_init(self):
-        self.worker = OnlineWorkerThread()
         self.worker.start()
-        self.worker.update_loc.connect(self.clickFreq)
+        self.worker.message_queue.connect(self.clickFreq)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
 from pyOpenBCI import OpenBCICyton
-from PyQt5 import QtCore, QtGui, QtWidgets
 from _collections import deque
 
 import numpy as np
@@ -21,8 +20,8 @@ class DataCollectorOnline:
     activate the offline UI
     '''
 
-    def __init__(self, UI):
-        self.params = read_params("params_offline.JSON")
+    def __init__(self, ui_thread):
+        self.params = read_params("../params_offline.JSON")
         # important params for time calculation
 
         self.time_between_events_rate = self.set_time_from_json()
@@ -30,12 +29,9 @@ class DataCollectorOnline:
         self.board = OpenBCICyton(port=self.params["port"], daisy=True)
         self.start_time = time.time()
         self.counter = 0
-        self.UI = UI
+        self.ui_thread = ui_thread
         self.pipeline = ModelPipeline()
         self.data_queue = deque(maxlen=self.params["PREDICTION_WINDOW_SIZE"])
-
-        # self.button_options = self.params_offline["9_screen_params"]["positions"]
-        # self.all_eeg_data = []
 
     def run_experiment(self, sample):
         """
@@ -47,13 +43,13 @@ class DataCollectorOnline:
         self.counter += 1  # count how many samples taken until now
         if self.counter % self.time_between_events_rate == 0 and \
                 len(self.data_queue) == self.params["PREDICTION_WINDOW_SIZE"]:  # TODO: ask Or what condition to use
-            freqLabel = self.pipeline.predict(list(self.data_queue))[0]
+            freqLabel = self.pipeline.predict(list(self.data_queue))
             frequency = labelToFrequency(freqLabel)
-            self.UI.update_loc.emit(frequency)
+            self.ui_thread.message_queue.emit(frequency)
 
         self.data_queue.append(data)
 
-        if int(all_time) >= self.params["EXPERIMENT_DURATION"]:  # TODO: set by UI ending
+        if int(all_time) >= self.params["EXPERIMENT_DURATION"] or self.ui_thread.terminate:  # TODO: set by UI ending
             self.board.stop_stream()
 
     def start_experiment(self):
@@ -62,12 +58,6 @@ class DataCollectorOnline:
     def end_experiment(self):
         self.board.disconnect()
         sys.exit(self.app.exec_())
-
-    # def init_UI(self):
-    #     app = QtWidgets.QApplication(sys.argv)
-    #     main_window = MainWindow()
-    #     app.exec_()
-    #     return main_window, app
 
     def set_time_from_json(self):
         TIME_BETWEEN_EVENTS = self.params["TIME_BETWEEN_EVENTS"]  # in seconds

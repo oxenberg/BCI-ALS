@@ -4,7 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
-from Offline.DataCollector import DataCollector
+from Offline.OfflineDataCollector import OfflineDataCollector
 from Model_Pipline.Data_Collector import DataCollectorOnline
 
 INITIAL_BUTTON_STYLE = "QPushButton {\n"
@@ -492,17 +492,18 @@ class OfflineWorkerThread(QThread):
 
     def __init__(self):
         super().__init__()
-        self.data_collector = DataCollector(self)
+        self.data_collector = OfflineDataCollector(self)
 
     def run(self):
         self.data_collector.start_expirement()
 
 
 class OnlineWorkerThread(QThread):
-    update_loc = pyqtSignal(float)
+    message_queue = pyqtSignal(float)
 
     def __init__(self):
         super().__init__()
+        self.terminate = False
         self.data_collector = DataCollectorOnline(self)
 
     def run(self):
