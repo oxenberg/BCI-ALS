@@ -4,12 +4,12 @@ import joblib
 from inputModule.utils import read_params
 import numpy as np
 
-MODEL_PATH = "model_pip.pkl"
+MODEL_PATH = "../Model_Pipline/model_pip.pkl"
 
 
 class ModelPipeline:
     def __init__(self):
-        self.params = read_params()
+        self.params = read_params('../params_offline.JSON')
         try:
             self.model = joblib.load(MODEL_PATH)
         except ValueError:

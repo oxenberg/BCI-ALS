@@ -27,10 +27,10 @@ import joblib
 from sklearn.svm import SVC, LinearSVC
 
 DATA_PATH = "../data/"
-EXP_NAME = DATA_PATH+"or_SSVEP_1_raw.fif" ## file name to run the anaylsis on
+EXP_NAME = DATA_PATH+"Yahel_long_x_raw.fif" ## file name to run the anaylsis on
 FS = 125 # sampling rate
 T = 1/FS # sample time
-tmin, tmax = 1.2, 5
+tmin, tmax = 1, 4
 
 cutoff = [4,40] # take the frq band from here
 

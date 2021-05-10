@@ -10,7 +10,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.decisionTree = read_json('online_UI_example.JSON')
-        self.params = read_json('../params_offline.JSON')
+        self.params = read_json('params_offline.JSON')
         self.uiTwo = Ui_TwoOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
