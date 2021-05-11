@@ -7,15 +7,23 @@ from PyQt5.QtWidgets import QFrame
 from Offline.OfflineDataCollector import OfflineDataCollector
 from Model_Pipline.Data_Collector import DataCollectorOnline
 
-INITIAL_BUTTON_STYLE = "QPushButton {\n"
-"  border-color: rgb(66, 69, 183);\n"
-"  border-width: 5px;        \n"
-"  border-style: solid;\n"
-"  border-radius: 40px;\n"
-"  padding:30px;\n"
-"  background-color: rgb(255, 255, 255);\n"
-"}\n"
-""
+INITIAL_BUTTON_STYLE = "QPushButton {\n  border-color: rgb(66, 69, 183);\n  border-width: 5px;        \n" \
+                       "  border-style: solid;\n  border-radius: 40px;\n  padding:30px;\n" \
+                       "  background-color: rgb(255, 255, 255);\n}\n"
+
+BLINK_STYLE = "QPushButton {\n  border-color: rgb(66, 69, 183);\n  border-width: 5px;        \n" \
+              "  border-style: solid;\n  border-radius: 40px;\n  padding:30px;\n" \
+              "  background-color: rgb(0, 0, 0);\n}\n"
+
+WHITE_STYLE = "QPushButton {\n  border-color: rgb(66, 69, 183);\n  border-width: 5px;        \n" \
+              "  border-style: solid;\n  border-radius: 40px;\n  padding:30px;\n" \
+              "  background-color: rgb(255, 255, 255);\n}\n"
+
+FRAME_STYLE = u"background-color: rgb(224, 236, 255, 0);\n border-color: rgb(207, 255, 192);\n " \
+              u"border-width: 12px;        \n border-style: solid;\n border-radius: 40px;\n" \
+              u"border-color: rgb(13, 186, 1);"
+
+MAIN_WINDOW_SIZE = (1500, 900)
 
 
 class BlinkButton(QPushButton):
@@ -37,25 +45,9 @@ class BlinkButton(QPushButton):
 
     def blink(self):
         if self.visible:
-            self.setStyleSheet("QPushButton {\n"
-                               "  border-color: rgb(66, 69, 183);\n"
-                               "  border-width: 5px;        \n"
-                               "  border-style: solid;\n"
-                               "  border-radius: 40px;\n"
-                               "  padding:30px;\n"
-                               "  background-color: rgb(255, 193, 185);\n"
-                               "}\n"
-                               "")
+            self.setStyleSheet(BLINK_STYLE)
         else:
-            self.setStyleSheet("QPushButton {\n"
-                               "  border-color: rgb(66, 69, 183);\n"
-                               "  border-width: 5px;        \n"
-                               "  border-style: solid;\n"
-                               "  border-radius: 40px;\n"
-                               "  padding:30px;\n"
-                               "  background-color: rgb(255, 255, 255);\n"
-                               "}\n"
-                               "")
+            self.setStyleSheet(WHITE_STYLE)
         self.visible = not self.visible
 
     def calcInterval(self, freq):
@@ -66,7 +58,7 @@ class Ui_TwoOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -86,12 +78,7 @@ class Ui_TwoOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -119,7 +106,7 @@ class Ui_ThreeOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -139,12 +126,7 @@ class Ui_ThreeOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -171,7 +153,7 @@ class Ui_ThreeOptionsWindow(object):
 class Ui_FourOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         MainWindow.setObjectName("SSVEP")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -191,12 +173,7 @@ class Ui_FourOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -221,7 +198,7 @@ class Ui_FiveOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -241,12 +218,7 @@ class Ui_FiveOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -274,7 +246,7 @@ class Ui_SixOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -294,12 +266,7 @@ class Ui_SixOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -327,7 +294,7 @@ class Ui_SevenOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -347,12 +314,7 @@ class Ui_SevenOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -380,7 +342,7 @@ class Ui_EightOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -400,12 +362,7 @@ class Ui_EightOptionsWindow(object):
             self.frame = QFrame(self.centralwidget)
             self.frame.setObjectName(u"frame")
             self.frame.setGeometry(QRect(*frame_loc))
-            self.frame.setStyleSheet(u"background-color: rgb(224, 236, 255, 0);\n"
-                                     "border-color: rgb(207, 255, 192);\n"
-                                     "border-width: 6px;        \n"
-                                     "border-style: solid;\n"
-                                     "border-radius: 40px;\n"
-                                     "border-color: rgb(13, 186, 1);")
+            self.frame.setStyleSheet(FRAME_STYLE)
             self.frame.setFrameShape(QFrame.StyledPanel)
             self.raise_all_buttons()
 
@@ -433,7 +390,7 @@ class Ui_NineOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None,show_content = True):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
         MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")

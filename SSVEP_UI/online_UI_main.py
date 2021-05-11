@@ -21,8 +21,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiNine = Ui_NineOptionsWindow()
         self.content = self.decisionTree.keys()
         self.frame_type = self.decideFrameType()
-        self.worker = OnlineWorkerThread()
-        self.worker_init()
+        # self.worker = OnlineWorkerThread()
+        # self.worker_init()
         self.new_trial()
         self.choices = []
         self.choice_counter = 0
@@ -93,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
             elif int(self.frame_type) == 9:
                 self.startNineOptionsWindow()
             else:
-                self.worker.terminate = True
+                # self.worker.terminate = True
                 self.close()
 
         elif self.currentChoice != choice:
