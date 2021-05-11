@@ -21,7 +21,7 @@ class DataCollectorOnline:
     '''
 
     def __init__(self, ui_thread):
-        self.params = read_params("../params_offline.JSON")
+        self.params = read_params("../SSVEP_UI/params_offline.JSON")
         # important params for time calculation
 
         self.time_between_events_rate = self.set_time_from_json()

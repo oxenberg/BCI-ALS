@@ -1,3 +1,4 @@
+from Offline import createModel
 from mne import Epochs, pick_types
 import mne
 import joblib
@@ -9,7 +10,7 @@ MODEL_PATH = "../Model_Pipline/model_pip.pkl"
 
 class ModelPipeline:
     def __init__(self):
-        self.params = read_params('../params_offline.JSON')
+        self.params = read_params('../SSVEP_UI/params_offline.JSON')
         try:
             self.model = joblib.load(MODEL_PATH)
         except ValueError:

@@ -19,7 +19,7 @@ class OfflineDataCollector:
     '''
 
     def __init__(self, UI):
-        self.params_offline = read_params("params_offline.JSON")
+        self.params_offline = read_params("../params_offline.JSON")
         # important params for calculate time
 
         self.time_between_events_rate = self.set_time_from_json()

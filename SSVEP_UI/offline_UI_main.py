@@ -6,7 +6,7 @@ from inputModule import read_params
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.params = read_params("params_offline.JSON")
+        self.params = read_params("../params_offline.JSON")
         self.worker_init()
         self.uiNine = Ui_NineOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
