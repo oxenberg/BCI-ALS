@@ -122,7 +122,7 @@ def train_mne_feature(data,labels,raw = None,sfreq = None):
     # params_grid = {} #: can addd gradinet boost hyperparametrs
 
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=10), n_jobs=1,
+                      cv=StratifiedKFold(n_splits=7), n_jobs=1,
                       return_train_score=True,verbose=10)
     gs.fit(data, y)
 
@@ -164,7 +164,7 @@ def train_mne_feature_stack(data,labels,raw):
                    "clf__rf__max_depth" :max_depth, "clf__final_estimator__solver" : solvers,
                    "clf__final_estimator__penalty" : penalty,"clf__final_estimator__C" : c_values}
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=10),
+                      cv=StratifiedKFold(n_splits=7),
                       return_train_score=True, verbose=10)
     gs.fit(data, labels)
     scores = pd.DataFrame(gs.cv_results_)
@@ -180,11 +180,7 @@ def train_mne_feature_stack(data,labels,raw):
 # selected_features = [("my_func",compute_medfilt),"mean",'kurtosis','skewness'] # can be cgahnged to any feature
 
 
-selected_features = [('power_band', power_band),'app_entropy',
-            'kurtosis',
-            'mean', 'ptp_amp', 'samp_entropy',
-            'skewness', 'spect_edge_freq', 'spect_entropy', 'spect_slope',
-            'svd_entropy', 'svd_fisher_info'] # can be changed to any feature
+selected_features = [('power_band', power_band), 'spect_edge_freq'] # can be changed to any feature
 
 # selected_features = ["mean",'kurtosis','skewness',('power_band', compute_medfilt)] # can be cgahnged to any feature
 
