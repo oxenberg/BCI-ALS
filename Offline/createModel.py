@@ -32,7 +32,16 @@ FS = 125 # sampling rate
 T = 1/FS # sample time
 tmin, tmax = 1, 4.5
 
-cutoff = [4,40] # take the frq band from here
+cutoff = [36, 38] # take the frq band from here
+cutoff1 = [30, 32] # take the frq band from here
+cutoff2 = [28, 30] # take the frq band from here
+cutoff3 = [22, 24] # take the frq band from here
+cutoff4 = [18, 20] # take the frq band from here
+cutoff5 = [16, 18] # take the frq band from here
+cutoff6 = [12, 14] # take the frq band from here
+cutoff7 = [10,12] # take the frq band from here
+cutoff8 = [6,8] # take the frq band from here
+
 
 features = ['app_entropy', 'decorr_time', 'higuchi_fd',
             'hjorth_complexity', 'hjorth_complexity_spect', 'hjorth_mobility',
@@ -104,6 +113,304 @@ def power_band(arr):
     return np.array(power_band)
 
 
+def power_band1(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff1[index]) & (freqs < cutoff1[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band2(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff2[index]) & (freqs < cutoff2[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band3(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff3[index]) & (freqs < cutoff3[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band4(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff4[index]) & (freqs < cutoff4[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band5(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff5[index]) & (freqs < cutoff5[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band6(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff6[index]) & (freqs < cutoff6[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band7(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff7[index]) & (freqs < cutoff7[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+def power_band8(arr):
+    """Median filtered signal as features.
+
+    Parameters
+    ----------
+    arr : ndarray, shape (n_channels, n_times)
+
+    Returns
+    -------
+    output : (n_channels * n_times,)
+    """
+    times_index = [[1,2]]
+
+    len_eeg = len(arr[0])
+
+    freqs, times, spectrogram = signal.spectrogram(arr, fs=125,nperseg = 32)
+
+    time_signal = np.linspace(tmin, tmax, len(times), endpoint=False)
+    power_band = []
+    for index in range(len(cutoff)-1):
+        for time_index in times_index:
+
+            chosen_times = np.where((time_signal > time_index[0]) & (time_signal < time_index[1]))[0]
+            chosen_freq = np.where((freqs > cutoff8[index]) & (freqs < cutoff8[index + 1]))[0]
+            spectrogram_area = spectrogram[:,chosen_freq,:].T
+
+            # arr_sample = arr[:2,chosen_times] # we choose 2 first chs
+            # f = np.linspace(0, FS, len(arr_sample), endpoint=False)
+            # fft = scipy.fft.fft(arr_sample)
+            # chosen_freq = np.where((f > cutoff[index]) & (f < cutoff[index + 1]))[0]
+            # fft_chosen_freq = fft[:, chosen_freq]
+            power_band.extend(spectrogram_area.flatten())
+
+    power_band = np.array(power_band)
+    return np.array(power_band)
+
+
+
+
 def train_mne_feature(data,labels,raw = None,sfreq = None):
     if not sfreq:
 
@@ -116,13 +423,13 @@ def train_mne_feature(data,labels,raw = None,sfreq = None):
     y = labels
 
     # params_grid = {'fe__app_entropy__emb': np.arange(2, 5)} #: can addd gradinet boost hyperparametrs
-    params_grid = {"clf__penalty": ["l1","l2"], "clf__alpha" : [0.002,0.003,0.004,0.005,0.01,0.1],
-                   "clf__max_iter" : [200,300,400,500,1000]} #: can addd gradinet boost hyperparametrs
+    params_grid = {"clf__penalty": ["l1","l2"], "clf__alpha" : [0.4, 0.5, 0.65, 0.8],  # [0.002,0.003,0.004,0.005,0.01,0.1],
+                   "clf__max_iter" : [200,500,1000]} #: can addd gradinet boost hyperparametrs
 
     # params_grid = {} #: can addd gradinet boost hyperparametrs
 
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=7), n_jobs=1,
+                      cv=StratifiedKFold(n_splits=5), n_jobs=1,
                       return_train_score=True,verbose=10)
     gs.fit(data, y)
 
@@ -144,7 +451,7 @@ def train_mne_feature(data,labels,raw = None,sfreq = None):
 
 def train_mne_feature_stack(data,labels,raw):
     n_estimators = [50, 200]
-    max_depth = [4]
+    max_depth = [6]
     solvers = ['newton-cg', 'lbfgs', 'liblinear']
     penalty = ['l2']
     c_values = [100, 10, 1.0, 0.1, 0.01]
@@ -159,12 +466,12 @@ def train_mne_feature_stack(data,labels,raw):
                                              selected_funcs=selected_features)),
                      ('scaler', StandardScaler()),
                      ('clf', clf)])
-    params_grid = {"clf__SGD__penalty": ["l1", "l2"], "clf__SGD__alpha": [0.003, 0.004],
-                   "clf__SGD__max_iter": [200, 300, 400, 500, 600], "clf__rf__n_estimators" : n_estimators,
+    params_grid = {"clf__SGD__penalty": ["l1", "l2"], "clf__SGD__alpha": [0.003, 0.004, 0.002, 0.01],
+                   "clf__SGD__max_iter": [200, 500, 600], "clf__rf__n_estimators" : n_estimators,
                    "clf__rf__max_depth" :max_depth, "clf__final_estimator__solver" : solvers,
                    "clf__final_estimator__penalty" : penalty,"clf__final_estimator__C" : c_values}
     gs = GridSearchCV(estimator=pipe, param_grid=params_grid,
-                      cv=StratifiedKFold(n_splits=7),
+                      cv=StratifiedKFold(n_splits=5),
                       return_train_score=True, verbose=10)
     gs.fit(data, labels)
     scores = pd.DataFrame(gs.cv_results_)
@@ -175,12 +482,13 @@ def train_mne_feature_stack(data,labels,raw):
     return pipe,scores
 
 
-# TODO add power band
 # https://mne.tools/mne-features/auto_examples/plot_user_defined_function.html#sphx-glr-auto-examples-plot-user-defined-function-py
 # selected_features = [("my_func",compute_medfilt),"mean",'kurtosis','skewness'] # can be cgahnged to any feature
 
 
-selected_features = [('power_band', power_band), 'spect_edge_freq'] # can be changed to any feature
+selected_features = [('power_band', power_band), ('power_band1', power_band1), ('power_band2', power_band2), ('power_band3', power_band3),
+                     ('power_band4', power_band4), ('power_band5', power_band5),('power_band6', power_band6),
+                     ('power_band7', power_band7), ('power_band8', power_band8)] # can be changed to any feature
 
 # selected_features = ["mean",'kurtosis','skewness',('power_band', compute_medfilt)] # can be cgahnged to any feature
 
