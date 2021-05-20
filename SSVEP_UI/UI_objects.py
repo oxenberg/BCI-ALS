@@ -54,6 +54,53 @@ class BlinkButton(QPushButton):
         return 500 / freq
 
 
+class Ui_OneOptionWindow(object):
+    def setupUi(self, MainWindow, params, frame_loc=None):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(*MAIN_WINDOW_SIZE)
+        MainWindow.setStyleSheet("background-color: rgb(224, 236, 255);")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName(u"centralwidget")
+
+        self.buttons = []
+        pb = BlinkButton(self.centralwidget, index=0, frequency=params['frequencies'][0],
+                         label=MainWindow.getContent()[0], onClick=MainWindow.layout_switcher)
+        pb.setStyleSheet(INITIAL_BUTTON_STYLE)
+        pb.blink()
+        pb.setGeometry(QtCore.QRect(*tuple(params["positions"][0])))
+        pb.setFont(QFont('Times', 20))
+        pb.setObjectName(str(0))
+        self.buttons.append(pb)
+
+        if frame_loc:
+            self.frame = QFrame(self.centralwidget)
+            self.frame.setObjectName(u"frame")
+            self.frame.setGeometry(QRect(*frame_loc))
+            self.frame.setStyleSheet(FRAME_STYLE)
+            self.frame.setFrameShape(QFrame.StyledPanel)
+            self.raise_all_buttons()
+
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+    # setupUi
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "SSVEP"))
+        for pb in self.buttons:
+            pb.setText(_translate("MainWindow", pb.label))
+        # retranslateUi
+
+    def raise_all_buttons(self):
+        self.frame.raise_()
+        for pb in self.buttons:
+            pb.raise_()
+
+
 class Ui_TwoOptionsWindow(object):
     def setupUi(self, MainWindow, params, frame_loc=None):
         if not MainWindow.objectName():

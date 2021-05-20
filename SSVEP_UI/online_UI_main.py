@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from SSVEP_UI.UI_objects import (
-    Ui_TwoOptionsWindow, Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_FiveOptionsWindow,
+    Ui_OneOptionWindow, Ui_TwoOptionsWindow, Ui_ThreeOptionsWindow, Ui_FourOptionsWindow, Ui_FiveOptionsWindow,
     Ui_SixOptionsWindow, Ui_SevenOptionsWindow, Ui_EightOptionsWindow, Ui_NineOptionsWindow, OnlineWorkerThread
 )
 from SSVEP_UI.utils import read_json
@@ -9,8 +9,10 @@ from SSVEP_UI.utils import read_json
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.decisionTree = read_json('./SSVEP_UI/online_UI_example.JSON')
+        # self.decisionTree = read_json('./SSVEP_UI/online_UI_example.JSON')
+        self.decisionTree = read_json('./SSVEP_UI/OneButton.JSON')
         self.params = read_json('params_offline.JSON')
+        self.uiOne = Ui_OneOptionWindow()
         self.uiTwo = Ui_TwoOptionsWindow()
         self.uiThree = Ui_ThreeOptionsWindow()
         self.uiFour = Ui_FourOptionsWindow()
@@ -28,6 +30,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.choice_counter = 0
         self.choiceTH = 2
         self.currentChoice = ""
+
+    def startOneOptionWindow(self):
+        self.uiOne.setupUi(self, self.params['1_screen_params'])
+        self.show()
 
     def startTwoOptionsWindow(self):
         self.uiTwo.setupUi(self, self.params['2_screen_params'])
@@ -76,7 +82,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.currentChoice = ''
             self.content = self.getNextLayer(choice)
             self.frame_type = self.decideFrameType()
-            if int(self.frame_type) == 2:
+            if int(self.frame_type) == 1:
+                self.startOneOptionWindow()
+            elif int(self.frame_type) == 2:
                 self.startTwoOptionsWindow()
             elif int(self.frame_type) == 3:
                 self.startThreeOptionsWindow()
@@ -104,7 +112,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.choice_counter = 1
 
     def new_trial(self, frame_loc=None):
-        if len(self.getContent()) == 2:
+        if len(self.getContent()) == 1:
+            self.uiOne.setupUi(self, params=self.params['1_screen_params'], frame_loc=frame_loc)
+        elif len(self.getContent()) == 2:
             self.uiTwo.setupUi(self, params=self.params['2_screen_params'], frame_loc=frame_loc)
         elif len(self.getContent()) == 3:
             self.uiThree.setupUi(self, params=self.params['3_screen_params'], frame_loc=frame_loc)
@@ -144,7 +154,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def clickFreq(self, freq):
         freqs = list(self.params[self.frame_type + '_screen_params']["frequencies"].values())
-        if self.frame_type == 2:
+        if self.frame_type == 1:
+            self.uiOne.buttons[freqs.index(freq)].click()
+        elif self.frame_type == 2:
             self.uiTwo.buttons[freqs.index(freq)].click()
         elif self.frame_type == 3:
             self.uiThree.buttons[freqs.index(freq)].click()
