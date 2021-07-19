@@ -14,6 +14,14 @@
   "RUN_EXP": 1,
   "EXP_FILE_NAME": "Yahel_long_x_raw.fif",
   "ch_names": ["Fp1", "Fp2", "C3", "C4", "P7", "P8", "O1", "O2", "F7", "F8", "F3", "F4", "T7", "T8", "P3", "P4"],
+  "1_screen_params": {
+      "positions": [
+      [500, 300, 500, 300]
+      ],
+      "frequencies": [
+      37.0
+      ]
+  },
   "2_screen_params": {
       "positions": [
       [332, 355, 250, 190],
