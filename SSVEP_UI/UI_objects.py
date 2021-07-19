@@ -7,6 +7,14 @@ from PyQt5.QtWidgets import QFrame
 from Offline.OfflineDataCollector import OfflineDataCollector
 from Model_Pipline.Data_Collector import DataCollectorOnline
 import time
+
+"""
+    here we setup the square (button) itself: the position, look, size and frequency
+    some attributes are the same for all and some are set according to JSON
+    each amount of squares on screen has the appropriate positions and frequencies
+    each square contains their own attributes but the group is set together
+"""
+
 INITIAL_BUTTON_STYLE = "QPushButton {\n  border-color: rgb(66, 69, 183);\n  border-width: 5px;        \n" \
                        "  border-style: solid;\n  border-radius: 40px;\n  padding:30px;\n" \
                        "  background-color: rgb(255, 255, 255);\n}\n"
@@ -27,6 +35,10 @@ MAIN_WINDOW_SIZE = (1500, 900)
 
 
 class BlinkButton(QPushButton):
+    """
+        Object for a square with the ability of blinking in a certain frequency
+        this method is not reliable enough for SSVEP invocation
+    """
     def __init__(self, parent, index, frequency, label, onClick):
         QPushButton.__init__(self, parent)
         self.time = time.time()
