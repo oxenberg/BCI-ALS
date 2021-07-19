@@ -6,7 +6,7 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtWidgets import QFrame
 from Offline.OfflineDataCollector import OfflineDataCollector
 from Model_Pipline.Data_Collector import DataCollectorOnline
-
+import time
 INITIAL_BUTTON_STYLE = "QPushButton {\n  border-color: rgb(66, 69, 183);\n  border-width: 5px;        \n" \
                        "  border-style: solid;\n  border-radius: 40px;\n  padding:30px;\n" \
                        "  background-color: rgb(255, 255, 255);\n}\n"
@@ -29,7 +29,8 @@ MAIN_WINDOW_SIZE = (1500, 900)
 class BlinkButton(QPushButton):
     def __init__(self, parent, index, frequency, label, onClick):
         QPushButton.__init__(self, parent)
-
+        self.time = time.time()
+        self.blink_counter = 0
         self.visible = True
         self.label = label
         self.frequency = frequency
@@ -45,6 +46,7 @@ class BlinkButton(QPushButton):
 
     def blink(self):
         if self.visible:
+            self.blink_counter += 1
             self.setStyleSheet(BLINK_STYLE)
         else:
             self.setStyleSheet(WHITE_STYLE)
@@ -52,6 +54,11 @@ class BlinkButton(QPushButton):
 
     def calcInterval(self, freq):
         return 500 / freq
+
+    def finish(self):
+        self.time = time.time() - self.time
+        print(f"time : {self.time}, amount : {self.blink_counter}")
+        print(f"frq : {self.frequency} , calc freq {self.blink_counter/self.time}")
 
 
 class Ui_TwoOptionsWindow(object):
@@ -443,6 +450,10 @@ class Ui_NineOptionsWindow(object):
             pb.raise_()
         self.frame.raise_()
 
+    def close(self):
+        for index,button in enumerate(self.buttons):
+            print(f"button {button}")
+            button.finish()
 
 class OfflineWorkerThread(QThread):
     update_loc = pyqtSignal(list)

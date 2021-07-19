@@ -39,7 +39,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.worker = OfflineWorkerThread()
         self.worker.start()
         self.worker.update_loc.connect(self.new_trial)
-
+    def closeEvent(self, event):
+        self.uiNine.close()
 
 if __name__ == "__main__":
     import sys

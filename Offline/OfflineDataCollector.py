@@ -34,6 +34,8 @@ class OfflineDataCollector:
         self.all_eeg_data = []
         self.stim = []
 
+        # self.start_expirement()
+
     def run_expirement(self, sample):
         """
         here we run all exp
@@ -44,7 +46,8 @@ class OfflineDataCollector:
         self.counter += 1  # count how many samples take until now
 
         if self.counter % self.time_between_events_rate == 0:
-            button_index = random.randint(1, self.params_offline["MAX_SSVEP_OPTIONS"])
+            # button_index = random.randint(1, self.params_offline["MAX_SSVEP_OPTIONS"])
+            button_index = random.randint(1, 2)
             choosen_button_loc = self.button_options[button_index-1]
             # self.UI.layout_switcher(choosen_button_loc)
 
@@ -86,9 +89,9 @@ class OfflineDataCollector:
         rawData = self.create_raw_data(array_data_v, self.stim)
 
         #: filter electrecy 50 hz freq
-        rawData.info['bads'].extend( ["Fp1", "Fp2", "C3", "C4", "P7", "P8", "F7", "F8", "F3", "F4", "T7", "T8"])  # add a list of channels
+        rawData.info['bads'] = ["Fp1", "Fp2", "C3", "C4", "P7", "P8", "F7", "F8", "F3", "F4", "T7", "T8"] # add a list of channels
 
-        rawData = rawData.filter(2, 45., fir_design='firwin')
+        rawData = rawData.filter(1, 45., fir_design='firwin')
 
         #: mainualy filtering
         events = mne.find_events(rawData, stim_channel='STI')

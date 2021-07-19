@@ -23,12 +23,12 @@ SAMPLE_RATE = 125
 TIME_BETWEEN_EVENTS_RATE = SAMPLE_RATE * TIME_BETWEEN_EVENTS
 
 uVolts_per_count = (4500000) / 24 / (2 ** 23 - 1)  # uV/count
-EXP_NAME = "../data/or_SSVEP_1_raw.fif"
+EXP_NAME = "../data/or_SSVEP_2_raw.fif"
 rawData = mne.io.read_raw_fif(EXP_NAME, preload=True)
 
 events = mne.find_events(rawData, stim_channel='STI')
 
-event_dict =  {"1": 1, "2": 2, "3": 3,"4": 4, "5": 5, "6": 6,"7": 7, "8": 8, "9": 9}
+event_dict =  {"1": 1, "2": 2, "3": 3,"4": 4, "5": 5, "6": 6, "8": 8}
 
 rawData.plot_psd(fmax=50, spatial_colors=True)
 
