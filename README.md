@@ -1,11 +1,11 @@
 # BCI-ALS
 
-### how to run
+### how to run SSVEP UI with the EEG
 
 1. Turn on the EEG
 
-2. To collect data run offline_UI_main.py and to config params use the params_offline.JSON in the
-same directory, please change the "EXP_NAME" param in the JSON to the name of your experiment.
+2. To collect data run offline_UI_main.py in SSVEP_UI and to config params use the params_offline.JSON in the
+father directory, please change the "EXP_NAME" param in the JSON to the name of your experiment.
    
 3. The window of the UI doesn't close by himself, take a look while running the experiment in the console to see if 
 the experiment finished

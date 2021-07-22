@@ -23,7 +23,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.uiNine = Ui_NineOptionsWindow()
         self.content = self.decisionTree.keys()
         self.frame_type = self.decideFrameType()
-        # self.worker = OnlineWorkerThread()
+        self.worker = OnlineWorkerThread()
         # self.worker_init()
         self.new_trial()
         self.choices = []
