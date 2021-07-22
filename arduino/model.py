@@ -20,13 +20,12 @@ class SnrModel:
         for stim_freq in self.stim_freqs:
             i_bin_i_hz = np.argmin(abs(freqs - stim_freq))
             snrs_target = snrs[:, i_bin_i_hz][picks_roi_vis].mean()
-            print(f'average SNR (occipital ROI): {snrs_target}')
             all_stim_freq.append(snrs_target)
 
         self.data.loc[self.data.shape[0] + 1] = all_stim_freq
 
 
-        return 1
+        return self.data.loc[self.data.shape[0]].idxmax()
     def extract_snr(self, psd, noise_n_neighbor_freqs=1, noise_skip_neighbor_freqs=1):
         """Compute SNR spectrum from PSD spectrum using convolution.
 
