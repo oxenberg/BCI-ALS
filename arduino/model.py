@@ -93,7 +93,7 @@ class SnrModel:
 
         ch_type = 'eeg'
         info = mne.create_info(self.params["ch_names"], self.params["SAMPLE_RATE"], ch_type)
-        rawData = mne.io.RawArray(matrix, info)
+        rawData = mne.io.RawArray(matrix, info, verbose=False)
         picks_roi_vis = self.pick_electrodes(rawData)
         rawData.filter(l_freq=0.1, h_freq=50, fir_design='firwin', verbose=False)
         psds, freqs = mne.time_frequency.psd_welch(
@@ -105,7 +105,6 @@ class SnrModel:
             window='boxcar',
             verbose=False)
 
-        print(psds,freqs)
 
         return psds, freqs , picks_roi_vis
 
