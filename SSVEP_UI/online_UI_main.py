@@ -20,7 +20,23 @@ NUMBERS = {ZERO_FIVE_KEY: ZERO_FIVE_DICT, SIX_NINE_KEY: SIX_NINE_DICT, ONE_SEVEN
 EXIT = 'Exit'
 RESTART = 'Restart'
 TERMINAL_KEYS = [EXIT, RESTART]
+COMMASPACE = ', '
 
+import smtplib
+from os.path import basename
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import formatdate
+import smtplib
+from pathlib import Path
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.utils import formatdate
+from email import encoders
+
+from fpdf import FPDF
 
 class MainWindow(QtWidgets.QMainWindow):
     """
@@ -126,12 +142,10 @@ class MainWindow(QtWidgets.QMainWindow):
             Helper function, sets frame around choice if choiceTH not met,
             or sets up the next screen according to decisionTree if choiceTH was met
         """
-
         # "0-4": "Numbers"
         # "5-9": "Numbers"
         # ".5": "Decimal"
         # "End Number": {"next step dict"}
-
         # print('Decide')
         # print(self.content)
         # print(self.frame_type)
@@ -167,9 +181,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 print(self.choices)
                 print(self.content)
                 print(self.frame_type)
-                self.export_choices()
+                path = self.export_choices()
                 print('exported')
-
+                self.convert_to_pdf_and_email(path)
+                print('converted to pdf')
                 if choice == "Exit":
                     self.close()
                     return
@@ -225,6 +240,61 @@ class MainWindow(QtWidgets.QMainWindow):
             for c in self.choices:
                 f.write(c)
                 f.write('\n')
+        return exported_file_path
+
+
+
+    def convert_to_pdf(self, path):
+        # save FPDF() class into
+        # a variable pdf
+        pdf = FPDF()
+        # Add a page
+        pdf.add_page()
+        # set style and size of font
+        # that you want in the pdf
+        pdf.set_font("Arial", size=15)
+        # open the text file in read mode
+        f = open(path, "r")
+        # insert the texts in pdf
+        for x in f:
+            pdf.cell(200, 10, txt=x, ln=1, align='C')
+        # save the pdf with name .pdf
+        pdf_path = path.replace('.txt', '.pdf')
+        pdf.output(pdf_path)
+        f.close()
+        return pdf_path
+
+    # def send_email(self, path):
+    #     send_from = 'afouri92@gmail.com'
+    #     send_to = ['afouri@post.bgu.ac.il']
+    #     server = "localhost"
+    #     port = 587
+    #
+    #     msg = MIMEMultipart()
+    #
+    #     msg['From'] = send_from
+    #     msg['To'] = COMMASPACE.join(send_to)
+    #     msg['Date'] = formatdate(localtime=True)
+    #     msg['Subject'] = 'test mail'
+    #
+    #     msg.attach(MIMEText('test mail text'))
+    #
+    #     with open(path, "rb") as fil:
+    #         part = MIMEApplication(
+    #             fil.read(),
+    #             Name=basename(path)
+    #         )
+    #     # After the file is closed
+    #     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(path)
+    #     msg.attach(part)
+    #
+    #     smtp = smtplib.SMTP(server)
+    #     smtp.sendmail(send_from, send_to, msg.as_string())
+    #     smtp.close()
+
+    def convert_to_pdf_and_email(self, path):
+        pdf_path = self.convert_to_pdf(path)
+        # self.send_email(pdf_path)
 
     def new_trial(self, frame_loc=None):
         """
