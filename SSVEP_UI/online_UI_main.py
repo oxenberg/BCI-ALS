@@ -9,7 +9,7 @@ from datetime import datetime
 ZERO_FIVE_KEY = '0-5'
 SIX_NINE_KEY = '6-9'
 ONE_SEVEN_KEY = '1-7'
-HALF_KEY = '0.5'
+HALF_KEY = '.5'
 NUMERICAL_KEYS = [ZERO_FIVE_KEY, SIX_NINE_KEY, ONE_SEVEN_KEY, HALF_KEY]
 NUMERICAL_VALS = [str(i) for i in range(10)] + ['.5']
 ZERO_FIVE_DICT = dict(zip([str(i) for i in range(6)], [str(i) for i in range(6)]))
@@ -139,7 +139,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.choice_counter = 0
             self.choices.append(choice)
             self.currentChoice = ''
-            if self.type_is_numerical(choice):
+            if self.type_is_numerical(choice) and choice != HALF_KEY:
                 print('type is num')
                 cat = self.choices[-1]
                 self.content = NUMBERS[cat]
@@ -259,11 +259,22 @@ class MainWindow(QtWidgets.QMainWindow):
     def is_choice_number(self, choice):
         return choice in NUMERICAL_VALS
 
+    def is_choice_float(self, l):
+        try:
+            float(l)
+            return True
+        except ValueError:
+            return False
+        # l.isnumeric() or l == '.5'
+
+
     def getNextLayer(self, choice, found_leaf=False):
         """
             move within decisionTree according to choice
             Uses list of choices to find the appropriate location
         """
+        print('nextLayer')
+        print(self.choices)
         if found_leaf:
             self.choices = []
             return dict(Exit="Exit", Restart="Restart")
@@ -289,7 +300,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # for l in self.choices:
         for l in choices_in_tree:
             if isinstance(nextOptions, dict):
-                if l.isnumeric() or l == '0.5':
+                if self.is_choice_float(l):
                     continue
                 nextOptions = nextOptions[l]
             else:

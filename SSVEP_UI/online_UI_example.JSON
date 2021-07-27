@@ -22,7 +22,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -33,12 +33,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n\n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -50,7 +50,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -61,12 +61,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n\n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -85,12 +85,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n\n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -114,7 +114,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -125,12 +125,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -142,7 +142,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -153,12 +153,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -177,12 +177,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -213,7 +213,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -224,12 +224,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -241,7 +241,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -252,12 +252,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -276,12 +276,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -305,7 +305,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -316,12 +316,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -333,7 +333,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -344,12 +344,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -368,12 +368,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -403,7 +403,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -414,12 +414,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -431,7 +431,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -442,12 +442,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -466,12 +466,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -495,7 +495,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -506,12 +506,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -523,7 +523,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -534,12 +534,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -558,12 +558,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -597,7 +597,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -608,12 +608,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -625,7 +625,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -636,12 +636,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -660,12 +660,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -689,7 +689,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -700,12 +700,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -717,7 +717,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -728,12 +728,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -752,12 +752,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -788,7 +788,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -799,12 +799,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -816,7 +816,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -827,12 +827,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -851,12 +851,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n\n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -880,7 +880,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -891,12 +891,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -908,7 +908,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -919,12 +919,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -943,12 +943,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -979,7 +979,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -990,12 +990,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -1007,7 +1007,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -1018,12 +1018,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -1042,12 +1042,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -1071,7 +1071,7 @@
 										"Back": "Back",
 										"0-5": "0-5",
 										"6-9": "6-9",
-										".5": "Decimal",
+										".5": ".5",
 										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "Numbers",
@@ -1082,12 +1082,12 @@
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Tissue length \n(tumor)": {
 														"Back": "Back",
 														"0-5": "0-5",
 														"6-9": "6-9",
-														".5": "Decimal",
+														".5": ".5",
 														"Done": "Done"
 													}
 												}
@@ -1099,7 +1099,7 @@
 									"Back": "Back",
 									"0-5": "0-5",
 									"6-9": "6-9",
-									".5": "Decimal",
+									".5": ".5",
 									"Tissue cores \n(total)": {
 										"Back": "Back",
 										"1-7": "Numbers",
@@ -1110,12 +1110,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
@@ -1134,12 +1134,12 @@
 												"Back": "Back",
 												"0-5": "0-5",
 												"6-9": "6-9",
-												".5": "Decimal",
+												".5": ".5",
 												"Tissue length \n(tumor)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
-													".5": "Decimal",
+													".5": ".5",
 													"Done": "Done"
 												}
 											}
