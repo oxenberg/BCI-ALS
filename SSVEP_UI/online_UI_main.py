@@ -289,7 +289,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # for l in self.choices:
         for l in choices_in_tree:
             if isinstance(nextOptions, dict):
-                if l.isnumeric():
+                if l.isnumeric() or l == '0.5':
                     continue
                 nextOptions = nextOptions[l]
             else:
