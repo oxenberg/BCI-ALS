@@ -1,4 +1,5 @@
-from inputModule import SignalReader
+from inputModule.inputModule import SignalReader
+# from inputModule import SignalReader
 
 
 def runOnline():

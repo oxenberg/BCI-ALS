@@ -4,6 +4,22 @@ from SSVEP_UI.UI_objects import (
     Ui_SixOptionsWindow, Ui_SevenOptionsWindow, Ui_EightOptionsWindow, Ui_NineOptionsWindow, OnlineWorkerThread
 )
 from SSVEP_UI.utils import read_json
+from datetime import datetime
+
+ZERO_FIVE_KEY = '0-5'
+SIX_NINE_KEY = '6-9'
+ONE_SEVEN_KEY = '1-7'
+HALF_KEY = '0.5'
+NUMERICAL_KEYS = [ZERO_FIVE_KEY, SIX_NINE_KEY, ONE_SEVEN_KEY, HALF_KEY]
+NUMERICAL_VALS = [str(i) for i in range(10)] + ['.5']
+ZERO_FIVE_DICT = dict(zip([str(i) for i in range(6)], [str(i) for i in range(6)]))
+SIX_NINE_DICT = dict(zip([str(i) for i in range(6, 10)], [str(i) for i in range(6, 10)]))
+ONE_SEVEN_DICT = dict(zip([str(i) for i in range(1, 8)], [str(i) for i in range(1, 8)]))
+# NUMBERS = dict(ZERO_FIVE_KEY=ZERO_FIVE_DICT, SIX_NINE_KEY=SIX_NINE_DICT)
+NUMBERS = {ZERO_FIVE_KEY: ZERO_FIVE_DICT, SIX_NINE_KEY: SIX_NINE_DICT, ONE_SEVEN_KEY: ONE_SEVEN_DICT}
+EXIT = 'Exit'
+RESTART = 'Restart'
+TERMINAL_KEYS = [EXIT, RESTART]
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -25,6 +41,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 :param currentChoice: string, remember last choice to verify TH
                 """
         super(MainWindow, self).__init__(parent)
+        # self.decisionTree = read_json('./SSVEP_UI/online_UI_example.JSON')
         self.decisionTree = read_json('./SSVEP_UI/online_UI_example.JSON')
         self.params = read_json('params_offline.JSON')
         self.uiOne = Ui_OneOptionWindow()
@@ -98,17 +115,78 @@ class MainWindow(QtWidgets.QMainWindow):
         position = self.params[self.frame_type + '_screen_params']['positions'][button_idx]
         self.decideNextWindow(choice_content, position)
 
+    def type_is_numerical(self, choice):
+        return choice in NUMERICAL_KEYS
+
+    def is_terminal(self, choice):
+        return choice in TERMINAL_KEYS
+
     def decideNextWindow(self, choice, position):
         """
             Helper function, sets frame around choice if choiceTH not met,
             or sets up the next screen according to decisionTree if choiceTH was met
         """
+
+        # "0-4": "Numbers"
+        # "5-9": "Numbers"
+        # ".5": "Decimal"
+        # "End Number": {"next step dict"}
+
+        # print('Decide')
+        # print(self.content)
+        # print(self.frame_type)
         if self.choice_counter == self.choiceTH and self.currentChoice == choice:
             self.choice_counter = 0
             self.choices.append(choice)
             self.currentChoice = ''
-            self.content = self.getNextLayer(choice)
-            self.frame_type = self.decideFrameType()
+            if self.type_is_numerical(choice):
+                print('type is num')
+                cat = self.choices[-1]
+                self.content = NUMBERS[cat]
+                self.frame_type = self.decideFrameType()
+                self.choices.pop()
+                print('removed the num key')
+            else:
+                self.content = self.getNextLayer(choice)
+                self.frame_type = self.decideFrameType()
+
+            # if self.content == -1:
+            #     self.close()
+            #     return
+            print('------------')
+            print(self.content)
+            print(self.frame_type)
+            # found a leaf, end of the tree, start all over
+            # if int(self.frame_type) == 0 or int(self.frame_type) > 9:
+            tmp = False
+            # if choice == "Restart":
+            # found a terminal leaf, reached to end of tree, choice is exit or restart
+            if int(self.frame_type) == -1 and not self.type_is_numerical(choice):
+                # self.worker.terminate = True
+                print('=== in the if, found a leaf ===')
+                print(self.choices)
+                print(self.content)
+                print(self.frame_type)
+                self.export_choices()
+                print('exported')
+
+                if choice == "Exit":
+                    self.close()
+                    return
+                # choice is restart
+                self.content = self.getNextLayer(choice, found_leaf=True)
+                self.frame_type = self.decideFrameType()
+                print('**********')
+                print(self.content)
+                print(self.frame_type)
+                # self.close()
+                tmp = True
+            if tmp:
+                print("got -1 and tmp is true")
+                tmp = False
+            # found a leaf, could be - end of tree, back option, numbers options (0-5, 6-9, .5)
+
+
             if int(self.frame_type) == 1:
                 self.startOneOptionWindow()
             elif int(self.frame_type) == 2:
@@ -127,10 +205,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.startEightOptionsWindow()
             elif int(self.frame_type) == 9:
                 self.startNineOptionsWindow()
-            else:
+            # else:
                 # self.worker.terminate = True
-                print(self.choices)
-                self.close()
+                # self.export_choices()
+                # print(self.choices)
+                # self.close()
 
         elif self.currentChoice != choice:
             enlarge = [-10, -10, 20, 20]
@@ -138,6 +217,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.currentChoice = choice
             self.new_trial(tuple(pos))
             self.choice_counter = 1
+
+    def export_choices(self):
+        exported_file_name = datetime.now().isoformat(timespec='minutes').replace(':', '')
+        exported_file_path = f'{exported_file_name}.txt'
+        with open(exported_file_path, 'w') as f:
+            for c in self.choices:
+                f.write(c)
+                f.write('\n')
 
     def new_trial(self, frame_loc=None):
         """
@@ -169,23 +256,56 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         return list(self.content)
 
-    def getNextLayer(self, choice):
+    def is_choice_number(self, choice):
+        return choice in NUMERICAL_VALS
+
+    def getNextLayer(self, choice, found_leaf=False):
         """
             move within decisionTree according to choice
             Uses list of choices to find the appropriate location
         """
+        if found_leaf:
+            self.choices = []
+            return dict(Exit="Exit", Restart="Restart")
+        # if choice == "Exit":
+        #     self.close()
+        #     return -1
+        if choice == "Restart":
+            self.choices = []
         if choice == "Back":
+            # pop twice:
+            # 1st to remove the 'back' choice
+            # 2nd to remove the last choice
             self.choices.pop()
+            self.choices.pop()
+        if self.is_choice_number(choice):
+            val = self.choices.pop()
+            if len(self.choices) > 0 and self.choices[-1].isnumeric():
+                val = self.choices.pop() + val
+            self.choices.append(val)
         nextOptions = self.decisionTree
-        for l in self.choices:
+        # reached_leaf = False
+        choices_in_tree = self.choices[:-1] if self.is_choice_number(choice) else self.choices
+        # for l in self.choices:
+        for l in choices_in_tree:
             if isinstance(nextOptions, dict):
+                if l.isnumeric():
+                    continue
                 nextOptions = nextOptions[l]
             else:
+                # never reaching here
+                print('====== in the else ======')
                 nextOptions = []
+                # nextOptions = dict(Exit="Exit", Restart="Restart")
+                # reached_leaf = True
         return nextOptions
 
     def decideFrameType(self):
-        return str(len(self.content))
+        # print('frame')
+        # print(self.content)
+        if not isinstance(self.content, str):
+            return str(len(self.content))
+        return str(-1)
 
     def getOutput(self):
         return self.choices
@@ -221,6 +341,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
+    # with open('SSVEP')
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = MainWindow()
