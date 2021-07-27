@@ -1,64 +1,1301 @@
 {
-  "A" : {"A1" : {
-                "A1a": "A1a - done",
-                "A1b": "A1b - done"
-              },
-        "A2" : {
-                "A2a": "A2a - done",
-                "A2b": "A2b - done",
-                "Back": "A2c - done"
-              },
-        "A3" : {
-                "A3a": "A3a - done",
-                "A3b": "A3b - done",
-                "A3c": "A3c - done",
-                "A3d": "A3d - done"
-              },
-        "A4" : {
-                "A4a": "A4a - done",
-                "A4b": "A4b - done",
-                "A4c": "A4c - done"
+  "ME Number" : {
+    "0-5": "Numbers",
+    "5-9": "Numbers",
+    "Back" : "Back",
+    "Location - Left" : {
+      "Back" : "Back",
+      "Apex" : {
+        "Back" : "Back",
+        "Malignant" : {
+          "Back" : "Back",
+          "Prostatic \n Adenocarcinoma" : {
+            "Gleason Grade \n Primary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n\n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n\n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n\n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n\n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \nnot 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n\n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n\n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
+            }
+          },
+          "Ductal \nAdenocarcinoma" : {
+            "Back" : "Back",
+            "Gleason Grade \n Primary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign" : "Benign - done"
       },
-  "B" : {"B1" : {
-                "B1a": "B1a - done",
-                "B1b": "B1b - done",
-                "B1c": "B1c - done",
-                "B1d": "B1d - done"
-              },
-        "B2" : {
-                "B2a": "B2a - done",
-                "B2b": "B2b - done",
-                "B2c": "B2c - done"
-              },
-        "B3" : {
-                "B3a": "B3a - done",
-                "B3b": "B3b - done",
-                "B3c": "B3c - done",
-                "B3d": "B3d - done"
-              },
-        "B4" : {
-                "B4a": "B4a - done",
-                "B4b": "B4b - done",
-                "B4c": "B4c - done"
+      "Base" : {
+        "Back" : "Back",
+        "Malignant" : {
+          "Back" : "Back",
+          "Prostatic \n Adenocarcinoma" : {
+            "Back" : "Back",
+            "Gleason Grade \n Primary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
+            }
+          },
+          "Ductal \nAdenocarcinoma" : {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign" : "Benign - done"
       },
-  "C" : {"C1" : {
-                "C1a": "C1a - done",
-                "C1b": "C1b - done",
-                "C1c": "C1c - done",
-                "C1d": "C1d - done"
-              },
-        "C2" : {
-                "C2a": "C2a - done",
-                "C2b": "C2b - done",
-                "C2c": "C2c - done"
-              },
-        "C3" : {
-                "C3a": "C3a - done",
-                "C3b": "C3b - done",
-                "C3c": "C3c - done",
-                "C3d": "C3d - done"
+      "Mid": {
+        "Malignant" : {
+          "Back" : "Back",
+          "Prostatic \nAdenocarcinoma" : {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
+            }
+          },
+          "Ductal \nAdenocarcinoma" : {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern" : {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7" : {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5":  "Decimal",
+                    "Tissue cores \n(total)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)" : {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5":  "Decimal",
+                            "Done" : {
+                              "Back" : "Back",
+                              "Restart" : "Restart",
+                              "Exit" : "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5":  "Decimal",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)" : {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)" : {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5":  "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5":  "Decimal",
+                          "Done" : {
+                            "Back" : "Back",
+                            "Restart" : "Restart",
+                            "Exit" : "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign" : "Benign - done"
       }
+    },
+
+    "Location - Right" : {
+      "Back" : "Back",
+      "Apex": {
+        "Back" : "Back",
+        "Malignant": {
+          "Back" : "Back",
+          "Prostatic \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Back" : "Back",
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Ductal \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Back" : "Back",
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign": "Benign - done"
+      },
+      "Base": {
+        "Back" : "Back",
+        "Malignant": {
+          "Back" : "Back",
+          "Prostatic \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Back" : "Back",
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n\n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Ductal \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign": "Benign - done"
+      },
+      "Mid": {
+        "Back" : "Back",
+        "Malignant": {
+          "Back" : "Back",
+          "Prostatic \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Back" : "Back",
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Ductal \nAdenocarcinoma": {
+            "Back" : "Back",
+            "Gleason Grade \nPrimary pattern": {
+              "Back" : "Back",
+              "0-5": "Numbers",
+              "Secondary \npattern": {
+                "Back" : "Back",
+                "0-5": "Numbers",
+                "Gleason score 7": {
+                  "Back" : "Back",
+                  "pattern-3": {
+                    "Back" : "Back",
+                    "0-5": "Numbers",
+                    "5-9": "Numbers",
+                    ".5": "Decimal",
+                    "Tissue cores \n(total)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue cores \n(tumor)": {
+                        "Back" : "Back",
+                        "1-7": "Numbers",
+                        "Tissue length \n(total)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Tissue length \n(tumor)": {
+                            "Back" : "Back",
+                            "0-5": "Numbers",
+                            "5-9": "Numbers",
+                            ".5": "Decimal",
+                            "Done": {
+                              "Back" : "Back",
+                              "Restart": "Restart",
+                              "Exit": "Exit"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pattern-4": {
+                  "Back" : "Back",
+                  "0-5": "Numbers",
+                  "5-9": "Numbers",
+                  ".5": "Decimal",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Gleason score \n not 7": {
+                  "Back" : "Back",
+                  "Tissue cores \n(total)": {
+                    "Back" : "Back",
+                    "1-7": "Numbers",
+                    "Tissue cores \n(tumor)": {
+                      "Back" : "Back",
+                      "1-7": "Numbers",
+                      "Tissue length \n(total)": {
+                        "Back" : "Back",
+                        "0-5": "Numbers",
+                        "5-9": "Numbers",
+                        ".5": "Decimal",
+                        "Tissue length \n(tumor)": {
+                          "Back" : "Back",
+                          "0-5": "Numbers",
+                          "5-9": "Numbers",
+                          ".5": "Decimal",
+                          "Done": {
+                            "Back" : "Back",
+                            "Restart": "Restart",
+                            "Exit": "Exit"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Benign": "Benign - done"
+      }
+    }
+  }
 }
