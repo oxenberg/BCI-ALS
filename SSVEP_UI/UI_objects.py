@@ -57,7 +57,7 @@ class BlinkButton(QPushButton):
         self.clicked.connect(onClick)
 
     def blink(self):
-        if self.visible:
+        if not self.visible:
             self.blink_counter += 1
             self.setStyleSheet(BLINK_STYLE)
         else:

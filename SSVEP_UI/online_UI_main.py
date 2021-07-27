@@ -234,10 +234,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.choice_counter = 1
 
     def export_choices(self):
+        parsed_choices = self.parse_choices(self.choices)
+
         exported_file_name = datetime.now().isoformat(timespec='minutes').replace(':', '')
         exported_file_path = f'{exported_file_name}.txt'
-        with open(exported_file_path, 'w') as f:
-            for c in self.choices:
+        with open(exported_file_path, 'w', encoding="utf-8") as f:
+            for c in parsed_choices:
                 f.write(c)
                 f.write('\n')
         return exported_file_path
@@ -252,12 +254,19 @@ class MainWindow(QtWidgets.QMainWindow):
         pdf.add_page()
         # set style and size of font
         # that you want in the pdf
-        pdf.set_font("Arial", size=15)
+        pdf.set_font("Arial", style="BU", size=11)
         # open the text file in read mode
         f = open(path, "r")
         # insert the texts in pdf
+        line = 0
         for x in f:
-            pdf.cell(200, 10, txt=x, ln=1, align='C')
+            if line == 1:
+                pdf.set_font(family="Arial", style="", size=11)
+            if line == 3:
+                pdf.set_font(family="Arial", style="B", size=11)
+            pdf.cell(200, 8, txt=x, ln=1, align='L')
+            line = line + 1
+
         # save the pdf with name .pdf
         pdf_path = path.replace('.txt', '.pdf')
         pdf.output(pdf_path)
@@ -295,6 +304,56 @@ class MainWindow(QtWidgets.QMainWindow):
     def convert_to_pdf_and_email(self, path):
         pdf_path = self.convert_to_pdf(path)
         # self.send_email(pdf_path)
+
+    def parse_choices(self, choices):
+        parsed = []
+
+        location = choices[2].split()[-1]
+        if location == "Left":
+            location = "LT"
+        else:
+            location = "RT"
+        parsed.append("ME-"+choices[1]+": Prostate, " + location + " " + choices[3] + ", biopsy")
+        is_benign = choices[4] == "Benign"
+        gleason = ","  # only relevant if score is 7
+        pattern = ""  # only relevant if score is 7
+        if is_benign:
+            parsed.append("Benign prostatic tissue.")
+        else:
+            carcinoma = choices[5].split()
+            gleason_score = int(choices[7]) + int(choices[9])
+            if gleason_score < 7:
+                grade_group = "1"
+            elif gleason_score < 8:
+                if choices[7] < choices[9]:  # 3 + 4
+                    grade_group = "2"
+                    gleason = "(3 + 4), "
+                else:  # 4 + 3
+                    grade_group = "3"
+                    gleason = " (4 + 3), "
+                pattern = choices[12] + "% " + choices[11] + ", "
+            elif gleason_score < 9:
+                grade_group = "4"
+            else:
+                grade_group = "5"
+
+            parsed.append(carcinoma[0] + " " + carcinoma[-1] + ", " + "Gleason Score " + gleason + pattern + "grade group-" + grade_group + ".")
+            if gleason_score == 7:
+                tissue_cores = choices[14]
+                tumor_cores = choices[16]
+                tissue_length = float(choices[18])
+                tumor_length = float(choices[20])
+            else:
+                tissue_cores = choices[12]
+                tumor_cores = choices[14]
+                tissue_length = float(choices[16])
+                tumor_length = float(choices[18])
+
+            parsed.append("Tumor involves " + tumor_cores + " of " + tissue_cores + " tissue cores and approx. " + str(round(tumor_length/tissue_length*100)) +
+                          "% of submitted tissue length (" + str(round(tumor_length, 1)) + " of " + str(round(tissue_length, 1)) + " mm).")
+
+        parsed.append("May Michael Scott L.N. 153418")
+        return parsed
 
     def new_trial(self, frame_loc=None):
         """

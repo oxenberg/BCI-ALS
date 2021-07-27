@@ -44,30 +44,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n\n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n\n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n\n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n\n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -136,30 +136,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -235,30 +235,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -327,30 +327,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -387,6 +387,7 @@
 				"Benign": "Benign - done"
 			},
 			"Mid": {
+				"Back": "Back",
 				"Malignant": {
 					"Back": "Back",
 					"Prostatic \nAdenocarcinoma": {
@@ -425,30 +426,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -517,30 +518,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -619,30 +620,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -711,30 +712,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -810,30 +811,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -902,30 +903,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -1001,30 +1002,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
@@ -1093,30 +1094,30 @@
 												}
 											}
 										}
-									}
-								},
-								"pattern-4": {
-									"Back": "Back",
-									"0-5": "0-5",
-									"6-9": "6-9",
-									".5": ".5",
-									"Tissue cores \n(total)": {
+									},
+									"pattern-4": {
 										"Back": "Back",
-										"1-7": "1-7",
-										"Tissue cores \n(tumor)": {
+										"0-5": "0-5",
+										"6-9": "6-9",
+										".5": ".5",
+										"Tissue cores \n(total)": {
 											"Back": "Back",
 											"1-7": "1-7",
-											"Tissue length \n(total)": {
+											"Tissue cores \n(tumor)": {
 												"Back": "Back",
-												"0-5": "0-5",
-												"6-9": "6-9",
-												".5": ".5",
-												"Tissue length \n(tumor)": {
+												"1-7": "1-7",
+												"Tissue length \n(total)": {
 													"Back": "Back",
 													"0-5": "0-5",
 													"6-9": "6-9",
 													".5": ".5",
-													"Done": "Done"
+													"Tissue length \n(tumor)": {
+														"Back": "Back",
+														"0-5": "0-5",
+														"6-9": "6-9",
+														".5": ".5",
+														"Done": "Done"
+													}
 												}
 											}
 										}
